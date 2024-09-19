@@ -1,1 +1,6 @@
-# capstone_calender_thm
+# Capstone - Calender_THM
+
+## Group
+- Tyler Overden
+- Hamza Shueib
+- Marcus Lim
