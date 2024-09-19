@@ -41,33 +41,55 @@ They have elevated privileges in managing calendars. All admins are users but no
 
 
 ## User stories
+### Admin 
 
 ### Create a calendar
     create an invite-only calendar
     have core events mapped out (these can't be edited/delete by members)
     name of organization/club
-    precondition: user must be logged as member or admin.
-    postcondition: 
+    precondition: user must be logged as an admin.
+    postcondition: Calendar is created
+
 ### Edit a calendar 
     edit organization name
-    precondition: user must be logged as admin.
-    postcondition: calendar is edited
+    precondition: user must be logged as admin, a regular user cannot edit the calendar 
+    postcondition: Calendar is edited
 
 ### delete a calendar
     deleting a calendar
-    precondition: user must be logged as admin.
-    post-condition: calendar is deleted
-
+    precondition: user must be logged as admin, a regular user cannot delete the calendar 
+    post-condition: Calendar is deleted
 
 ### Creating an event
-    anyone can create an event but members have to be approved for broadcast events (events shared to everyone in org)
-    precondition: user must be logged in as admin or member
-    post-condition: if member and events are non-broadcast automatically approve. Need approval for broadcast events unless user is admin
+    creates a broadcast or personal event 
+    precondition: User is logged in as an admin. 
+    post-condition: Events are created without needing approval as the user is an admin 
 
 ### Edit an event 
-    precondition: user must be logged in as admin or member. Event has to be in future
-    post-condition: if user is member and event to edited are non-broadcast automatically approve. Need approval for broadcast events unless user is admin
+    Edits a scheduled event
+    precondition: User is logged in as an admin. Event has to be in future
+    post-condition: Events are edited without needing approval as the user is an admin 
+
+
+### Delete an event
+    Deletes a scheduled event
+    precondition: User is logged in as an admin. Event has to be in future but the admin can delete any broadcast or personal event
+    post-condition: Events are deleted without needing approval as the user is an admin. 
+
+
+### User
+### Creating an event
+    creates a broadcast or personal event 
+    precondition: User is logged in as a member. 
+    post-condition: For personal events, they're approved automatically but for broadcast events, they must be approved by admins 
+
+### Edit an event 
+    Edits a scheduled event
+    precondition: user must be logged as a member. Event has to be in future
+    post-condition: Personal events are edited automatically, broadcast events require approval from the admin. 
 
 ### delete an event
-    precondition: user must be logged in as admin or member. Event has to be in future
-    post-condition: if user is member and event to deleted are non-broadcast automatically approve. If event is broadcast, event is deleted from user's view but not from admin's view and other member view (not attending). 
+    Deletes a scheduled personal event. 
+    precondition: user must be logged as a member. Event has to be in future & have to be personal events. Users cannot delete broadcast events
+    without admin privileges.  
+    post-condition: Personal events would be deleted automatically, they are removed from the user's view. 
