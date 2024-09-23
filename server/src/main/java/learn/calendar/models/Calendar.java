@@ -1,5 +1,7 @@
 package learn.calendar.models;
 
+import java.util.Objects;
+
 public class Calendar {
     private String title;
     private int id;
@@ -43,5 +45,18 @@ public class Calendar {
 
     public void setUser(AppUser user) {
         this.user = user;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Calendar calendar = (Calendar) o;
+        return id == calendar.id && Objects.equals(title, calendar.title) && type == calendar.type && Objects.equals(user, calendar.user);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(title, id, type, user);
     }
 }
