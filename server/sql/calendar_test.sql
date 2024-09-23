@@ -65,17 +65,9 @@ create table calendar_user_role (
     app_user_id int not null,
     role_id int not null,
     calendar_id int not null,
-    constraint pk_app_user_role
-        primary key (app_user_id, role_id, calendar_id),
-    constraint fk_cal_user_role_user_id
-        foreign key (app_user_id)
-        references app_user(app_user_id),
-	constraint fk_cal_user_role_cal_id
-        foreign key (calendar_id)
-        references calendar(calendar_id),
-    constraint fk_cal_user_role_role_id
-        foreign key (role_id)
-        references role(role_id)
+    foreign key (app_user_id) references app_user(app_user_id),
+    foreign key (calendar_id) references calendar(calendar_id),
+    foreign key (role_id) references role(role_id)
 );
 
 
