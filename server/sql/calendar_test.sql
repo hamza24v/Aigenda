@@ -1,6 +1,6 @@
-drop database if exists calendar_db;
-create database calendar_db;
-use calendar_db;
+drop database if exists calendar_db_test;
+create database calendar_db_test;
+use calendar_db_test;
 
 create table app_user (
 	app_user_id int primary key auto_increment,
@@ -70,5 +70,23 @@ create table calendar_user_role (
     foreign key (role_id) references role(role_id)
 );
 
+insert into app_user (first_name, last_name, email, username, disabled, password)
+values 
+('John', 'Doe', 'john.doe@gmail.com', 'testuser', false, 'password123'),
+('Jane', 'Smith', 'jane.smith@gmail.com', 'usertest', false, 'password456');
+
+insert into calendar (title, type, app_user_id)
+values 
+('Work Cal', 'Broadcast', 1),
+('Personal Calendar', 'Personal', 2);
+
+insert into event (title, description, calendar_id, app_user_id, type, start_time, end_time, status)
+values
+('Project Meeting', 'Discuss project updates', 1, 1, 'Organization', 
+    '2024-10-25 10:00:00', '2024-10-25 11:00:00', 'Scheduled'),
+('Get dinner', 'Go get dinner', 2, 2, 'Personal', 
+    '2024-09-30 18:00:00', '2024-09-30 19:00:00', 'Scheduled');
+    
+select * from event;
 
 

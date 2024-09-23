@@ -8,7 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class AttendeeMapper implements RowMapper<Attendee> {
-    
+
     @Override
     public Attendee mapRow(ResultSet resultSet, int i) throws SQLException {
         Attendee attendee = new Attendee();
