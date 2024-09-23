@@ -4,22 +4,22 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 
 public class Event {
-    private int event_id;
+    private int eventId;
     private String title;
     private String description;
-    private int calendar_id;
-    private int app_user_id;
+    private int calendarId;
+    private int appUserId;
     private EventType eventType;
     private LocalDateTime startDate;
     private LocalDateTime endDate;
     private String status;
 
-    public int getEvent_id() {
-        return event_id;
+    public int getEventId() {
+        return eventId;
     }
 
-    public void setEvent_id(int event_id) {
-        this.event_id = event_id;
+    public void setEventId(int eventId) {
+        this.eventId = eventId;
     }
 
     public String getTitle() {
@@ -38,20 +38,20 @@ public class Event {
         this.description = description;
     }
 
-    public int getCalendar_id() {
-        return calendar_id;
+    public int getCalendarId() {
+        return calendarId;
     }
 
-    public void setCalendar_id(int calendar_id) {
-        this.calendar_id = calendar_id;
+    public void setCalendarId(int calendarId) {
+        this.calendarId = calendarId;
     }
 
-    public int getApp_user_id() {
-        return app_user_id;
+    public int getAppUserId() {
+        return appUserId;
     }
 
-    public void setApp_user_id(int app_user_id) {
-        this.app_user_id = app_user_id;
+    public void setAppUserId(int appUserId) {
+        this.appUserId = appUserId;
     }
 
     public EventType getEventType() {
@@ -91,9 +91,9 @@ public class Event {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Event event = (Event) o;
-        return event_id == event.event_id &&
-                calendar_id == event.calendar_id &&
-                app_user_id == event.app_user_id &&
+        return eventId == event.eventId &&
+                calendarId == event.calendarId &&
+                appUserId == event.appUserId &&
                 Objects.equals(title, event.title) &&
                 Objects.equals(description, event.description) &&
                 eventType == event.eventType &&
@@ -104,6 +104,6 @@ public class Event {
 
     @Override
     public int hashCode() {
-        return Objects.hash(event_id, title, description, calendar_id, app_user_id, eventType, startDate, endDate, status);
+        return Objects.hash(eventId, title, description, calendarId, appUserId, eventType, startDate, endDate, status);
     }
 }
