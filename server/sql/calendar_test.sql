@@ -17,7 +17,7 @@ create table calendar (
     title varchar(100) not null,
     type varchar(50) not null,
     app_user_id int,
-    foreign key (app_user_id) references user(app_user_id)
+    foreign key (app_user_id) references app_user(app_user_id)
 );
 
 create table event (
@@ -80,4 +80,6 @@ create table calendar_user_role (
         foreign key (role_id)
         references role(role_id)
 );
+
+
 
