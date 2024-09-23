@@ -1,4 +1,26 @@
 package learn.calendar.data.mappers;
 
-public class CalendarMapper {
+
+import learn.calendar.models.CalType;
+import learn.calendar.models.Calendar;
+import org.springframework.jdbc.core.RowMapper;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+public class CalendarMapper implements RowMapper<Calendar> {
+
+
+    @Override
+    public Calendar mapRow(ResultSet resultSet, int i) throws SQLException {
+        Calendar calendar = new Calendar();
+        calendar.setId(resultSet.getInt("calendar_id"));
+        calendar.setTitle(resultSet.getString("title"));
+        String typeString = resultSet.getString("type");
+        CalType type = CalType.valueOf(typeString.toUpperCase());
+        calendar.setType(type);
+        calendar.setUser(resultSet.getInt("app_user_id"));
+
+        return calendar;
+    }
 }

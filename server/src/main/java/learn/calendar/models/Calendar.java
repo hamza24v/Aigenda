@@ -6,13 +6,16 @@ public class Calendar {
     private String title;
     private int id;
     private CalType type;
-    private AppUser user;
+    private int userId;
 
-    public Calendar(String title, int id, CalType type, AppUser user) {
+    public Calendar(String title, int id, CalType type, int userId) {
         this.title = title;
         this.id = id;
         this.type = type;
-        this.user = user;
+        this.userId = userId;
+    }
+    public Calendar(){
+
     }
 
     public String getTitle() {
@@ -39,12 +42,12 @@ public class Calendar {
         this.type = type;
     }
 
-    public AppUser getUser() {
-        return user;
+    public int getUser() {
+        return userId;
     }
 
-    public void setUser(AppUser user) {
-        this.user = user;
+    public void setUser(int userId) {
+        this.userId = userId;
     }
 
     @Override
@@ -52,11 +55,11 @@ public class Calendar {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Calendar calendar = (Calendar) o;
-        return id == calendar.id && Objects.equals(title, calendar.title) && type == calendar.type && Objects.equals(user, calendar.user);
+        return id == calendar.id && Objects.equals(title, calendar.title) && type == calendar.type && userId == calendar.userId;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(title, id, type, user);
+        return Objects.hash(title, id, type, userId);
     }
 }

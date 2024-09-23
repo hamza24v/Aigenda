@@ -45,8 +45,7 @@ create table attendee (
 
 create table role (
     role_id int primary key auto_increment,
-    `name` varchar(50) not null,
-
+    `name` varchar(50) not null
 );
 
 create table invitation (
