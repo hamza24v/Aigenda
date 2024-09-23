@@ -45,11 +45,8 @@ create table attendee (
 
 create table role (
     role_id int primary key auto_increment,
-    calendar_id int,
-    app_user_id int,
-    role_type varchar(50) not null,
-    foreign key (calendar_id) references calendar(calendar_id),
-    foreign key (app_user_id) references app_user(app_user_id)
+    `name` varchar(50) not null,
+
 );
 
 create table invitation (
@@ -65,6 +62,7 @@ create table invitation (
 
 
 create table calendar_user_role (
+    id int primary key auto_increment,
     app_user_id int not null,
     role_id int not null,
     calendar_id int not null,
