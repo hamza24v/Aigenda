@@ -51,15 +51,15 @@ export const MyCalendar = () => {
   };
 
   return (
-    <div className="h-screen p-4">
+    <div className="w-full h-full">
       <Calendar
         localizer={localizer}
         events={myEvents}
         startAccessor="start"
         endAccessor="end"
-        style={{ height: "100%" }}
         onSelectSlot={handleSelectSlot}
         selectable
+        style={{ height: "100vh" }}
       />
     </div>
   );
