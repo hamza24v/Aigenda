@@ -2,7 +2,7 @@ drop database if exists calendar_db;
 create database calendar_db;
 use calendar_db;
 
-create table user (
+create table app_user (
 	user_id int primary key auto_increment,
 	first_name varchar(60) not null,
     last_name varchar(60) not null,
@@ -29,7 +29,7 @@ create table event (
     end_time datetime not null,
     status varchar(50) not null,
     foreign key (calendar_id) references calendar(calendar_id),
-    foreign key (user_id) references user(user_id)
+    foreign key (user_id) references app_user(user_id)
 );
 
 create table attendee (
@@ -38,7 +38,7 @@ create table attendee (
     user_id int,
     status varchar(50) not null,
     foreign key (event_id) references event(event_id),
-    foreign key (user_id) references user(user_id)
+    foreign key (user_id) references app_user(user_id)
 );
 
 create table role (
@@ -47,7 +47,7 @@ create table role (
     user_id int,
     role_type varchar(50) not null,
     foreign key (calendar_id) references calendar(calendar_id),
-    foreign key (user_id) references user(user_id)
+    foreign key (user_id) references app_user(user_id)
 );
 
 create table invitation (
@@ -57,6 +57,6 @@ create table invitation (
     status varchar(50) not null,
     foreign key (event_id) references event(event_id),
     foreign key (calendar_id) references calendar(calendar_id),
-    foreign key (user_id) references user(user_id),
+    foreign key (user_id) references app_user(user_id),
     primary key (event_id, calendar_id, user_id)
 );
