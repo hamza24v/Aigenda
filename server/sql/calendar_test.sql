@@ -7,7 +7,9 @@ create table app_user (
 	first_name varchar(60) not null,
     last_name varchar(60) not null,
     email varchar(100) not null,
-	password varchar(100) not null
+	username varchar(100) not null,
+	disabled boolean not null default(0),
+	password varchar(2048) not null
 );
 
 create table calendar (
