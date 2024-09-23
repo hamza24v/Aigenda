@@ -101,7 +101,7 @@ public class Event {
                 Objects.equals(endDate, event.endDate) &&
                 Objects.equals(status, event.status);
     }
-    
+
     @Override
     public int hashCode() {
         return Objects.hash(event_id, title, description, calendar_id, app_user_id, eventType, startDate, endDate, status);
