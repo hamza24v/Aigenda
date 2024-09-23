@@ -7,13 +7,17 @@ public class Attendee {
     private int id;
     private String status;
     private Event event;
-    private AppUser user;
+    private int userId;
 
-    public Attendee(int id, String status, Event event, AppUser user) {
+    public Attendee(){
+
+    }
+
+    public Attendee(int id, String status, Event event, int userId) {
         this.id = id;
         this.status = status;
         this.event = event;
-        this.user = user;
+        this.userId = userId;
     }
 
     public int getId() {
@@ -40,12 +44,12 @@ public class Attendee {
         this.event = event;
     }
 
-    public AppUser getUser() {
-        return user;
+    public int getUserId() {
+        return userId;
     }
 
-    public void setUser(AppUser user) {
-        this.user = user;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     @Override
@@ -53,11 +57,11 @@ public class Attendee {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Attendee attendee = (Attendee) o;
-        return id == attendee.id && Objects.equals(status, attendee.status) && Objects.equals(event, attendee.event) && Objects.equals(user, attendee.user);
+        return id == attendee.id && Objects.equals(status, attendee.status) && Objects.equals(event, attendee.event) && userId == attendee.userId;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, status, event, user);
+        return Objects.hash(id, status, event, userId);
     }
 }

@@ -17,7 +17,7 @@ create table calendar (
     title varchar(100) not null,
     type varchar(50) not null,
     app_user_id int,
-    foreign key (app_user_id) references user(app_user_id)
+    foreign key (app_user_id) references app_user(app_user_id)
 );
 
 create table event (
@@ -45,11 +45,7 @@ create table attendee (
 
 create table role (
     role_id int primary key auto_increment,
-    calendar_id int,
-    app_user_id int,
-    role_type varchar(50) not null,
-    foreign key (calendar_id) references calendar(calendar_id),
-    foreign key (app_user_id) references app_user(app_user_id)
+    `name` varchar(50) not null
 );
 
 create table invitation (
@@ -64,15 +60,15 @@ create table invitation (
 );
 
 
-create table app_user_role (
+create table calendar_user_role (
+    id int primary key auto_increment,
     app_user_id int not null,
     role_id int not null,
-    constraint pk_app_user_role
-        primary key (app_user_id, role_id),
-    constraint fk_app_user_role_user_id
-        foreign key (app_user_id)
-        references app_user(app_user_id),
-    constraint fk_app_user_role_role_id
-        foreign key (role_id)
-        references role(role_id)
+    calendar_id int not null,
+    foreign key (app_user_id) references app_user(app_user_id),
+    foreign key (calendar_id) references calendar(calendar_id),
+    foreign key (role_id) references role(role_id)
 );
+
+
+
