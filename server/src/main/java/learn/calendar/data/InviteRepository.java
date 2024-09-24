@@ -8,6 +8,6 @@ public interface InviteRepository {
     List<Invite> findAll();
 
     Invite findById(int inviteId);
-
+    Invite add(Invite invite);
     boolean delete(int inviteId);
 }

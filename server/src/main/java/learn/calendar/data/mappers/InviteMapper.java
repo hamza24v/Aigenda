@@ -14,6 +14,7 @@ public class InviteMapper implements RowMapper<Invite> {
         Invite invite = new Invite();
         invite.setInvitation_id(resultSet.getInt("invite_id"));
         invite.setStatus(resultSet.getString("status"));
+        invite.setCalendar_id(resultSet.getInt("calendar_id"));
         invite.setUser_id(resultSet.getInt("app_user_id"));
         invite.setEvent_id(resultSet.getInt("event_id"));
 

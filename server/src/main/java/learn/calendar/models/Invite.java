@@ -6,7 +6,16 @@ public class Invite {
     private int invitation_id;
     private int event_id;
     private int user_id;
+    private int calendar_id;
     private String status;
+
+    public int getCalendar_id() {
+        return calendar_id;
+    }
+
+    public void setCalendar_id(int calendar_id) {
+        this.calendar_id = calendar_id;
+    }
 
     public int getInvitation_id() {
         return invitation_id;
