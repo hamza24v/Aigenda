@@ -4,16 +4,18 @@ import learn.calendar.models.Event;
 import learn.calendar.models.EventType;
 import org.springframework.jdbc.core.RowMapper;
 
-import java.sql.Date;
+
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class EventMapper implements RowMapper<Event> {
+
     @Override
     public Event mapRow(ResultSet resultSet, int i) throws SQLException {
+
         Event event = new Event();
         event.setEventId(resultSet.getInt("event_id"));
         event.setTitle(resultSet.getString("title"));

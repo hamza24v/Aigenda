@@ -23,13 +23,15 @@ public class EventJdbcTemplateRepository implements EventRepository {
 
     @Override
     public List<Event> findAll() {
-        final String sql = "select * " + "from event limit 1000;";
+        final String sql = "select event_id, title, description, calendar_id, app_user_id, type, "
+                + "start_time, end_time, status " + "from event limit 1000;";
         return jdbcTemplate.query(sql, new EventMapper());
     }
 
     @Override
     public Event findById(int eventId) {
-       final String sql = "select * " + "from event " + "where event_id = ?;";
+        final String sql = "select event_id, title, description, calendar_id, app_user_id, type, "
+                + "start_time, end_time, status " + "from event " + "where event_id = ?;";
         Event event = jdbcTemplate.query(sql, new EventMapper(), eventId).stream()
                 .findFirst().orElse(null);
         return event;
@@ -94,7 +96,6 @@ public class EventJdbcTemplateRepository implements EventRepository {
     @Override
     @Transactional
     public boolean deleteById(int eventId) {
-        jdbcTemplate.update("delete from event where event_id = ?;", eventId);
         return jdbcTemplate.update("delete from event where event_id = ?;", eventId) > 0;
     }
 }

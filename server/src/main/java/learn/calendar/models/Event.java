@@ -14,6 +14,33 @@ public class Event {
     private LocalDateTime endDate;
     private String status;
 
+    public Event(int eventId, String title, String description, int calendarId, int appUserId, EventType eventType, LocalDateTime startDate, LocalDateTime endDate, String status) {
+        this.eventId = eventId;
+        this.title = title;
+        this.description = description;
+        this.calendarId = calendarId;
+        this.appUserId = appUserId;
+        this.eventType = eventType;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.status = status;
+    }
+
+    public Event(String title, String description, int calendarId, int appUserId, EventType eventType, LocalDateTime startDate, LocalDateTime endDate, String status) {
+        this.title = title;
+        this.description = description;
+        this.calendarId = calendarId;
+        this.appUserId = appUserId;
+        this.eventType = eventType;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.status = status;
+    }
+
+    public Event(){
+
+    }
+
     public int getEventId() {
         return eventId;
     }
