@@ -36,7 +36,7 @@ public class AttendeeService {
         }
 
         if(attendee.getId() > 0) {
-            result.addMessage("You can't set the  ", ResultType.INVALID);
+            result.addMessage("You can't set the id of the attendee", ResultType.INVALID);
 
         }
         if(eventRepository.findById(attendee.getEvent().getEventId())== null){

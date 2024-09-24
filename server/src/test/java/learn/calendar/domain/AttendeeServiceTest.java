@@ -52,21 +52,72 @@ class AttendeeServiceTest {
     @Test
     void canAdd() {
         Attendee attendee = makeAttendee();
+        when(eventRepository.findById(attendee.getEvent().getEventId())).thenReturn(makeEvent());
+        when(appUserRepository.findById(attendee.getUserId())).thenReturn(makeAppUser());
+        when(attendeeRepository.add(attendee)).thenReturn(attendee);
 
+        Result<Attendee> result = service.add(attendee);
+        System.out.println(result.getMessages());
+        assertTrue(result.isSuccess());
+        assertEquals(attendee, result.getPayload());
+    }
+
+    @Test
+    void cannotAddIDSet() {
+        Attendee attendee = makeAttendee();
+        // you can't set the id when adding
+        attendee.setId(10);
 
         when(eventRepository.findById(attendee.getEvent().getEventId())).thenReturn(makeEvent());
         when(appUserRepository.findById(attendee.getUserId())).thenReturn(makeAppUser());
         when(attendeeRepository.add(attendee)).thenReturn(attendee);
 
         Result<Attendee> result = service.add(attendee);
-     //   System.out.println()
-        assertTrue(result.isSuccess());
+        System.out.println(result.getMessages());
+        assertFalse(result.isSuccess());
 
         assertEquals(attendee, result.getPayload());
     }
 
     @Test
+    void cannotAddStatusIsEmpty() {
+        Attendee attendee = makeAttendee();
+        // you can't set the id when adding
+        attendee.setStatus("");
+
+        when(eventRepository.findById(attendee.getEvent().getEventId())).thenReturn(makeEvent());
+        when(appUserRepository.findById(attendee.getUserId())).thenReturn(makeAppUser());
+        when(attendeeRepository.add(attendee)).thenReturn(attendee);
+
+        Result<Attendee> result = service.add(attendee);
+        System.out.println(result.getMessages());
+        assertFalse(result.isSuccess());
+
+    }
+
+    @Test
+    void cannotEventAndUserDNE() {
+        Attendee attendee = makeAttendee();
+        when(attendeeRepository.add(attendee)).thenReturn(attendee);
+
+        Result<Attendee> result = service.add(attendee);
+        System.out.println(result.getMessages());
+        assertFalse(result.isSuccess());
+        assertEquals(attendee, result.getPayload());
+    }
+
+
+
+    @Test
     void canDeleteById() {
+        int attendeeId = 1;
+        when(attendeeRepository.deleteById(attendeeId)).thenReturn(true);
+        boolean result = service.deleteById(attendeeId);
+        assertTrue(result);
+        //test for when id doesn't exist
+        when(attendeeRepository.deleteById(999)).thenReturn(false);
+        result = service.deleteById(999);
+        assertFalse(result);
     }
 
 
@@ -89,7 +140,6 @@ class AttendeeServiceTest {
 
     private Attendee makeAttendee() {
         Attendee attendee = new Attendee();
-        attendee.setId(1);
         attendee.setStatus("Confirmed");
         attendee.setEvent(makeEvent());
         attendee.setUserId(1);
@@ -99,7 +149,7 @@ class AttendeeServiceTest {
     private Event makeEvent() {
         Event event = new Event();
         event.setEventId(1);
-        event.setTitle("Sample Event");
+        event.setTitle("Party");
         return event;
     }
 }
