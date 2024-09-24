@@ -87,6 +87,16 @@ values
 ('Get dinner', 'Go get dinner', 2, 2, 'Personal', 
     '2024-09-30 18:00:00', '2024-09-30 19:00:00', 'Scheduled');
     
-select * from event;
+insert into role (name)
+values 
+('Admin'),
+('User');
+
+insert into attendee (event_id, app_user_id, status)
+values
+(1, 1, 'Confirmed'), 
+(2, 2, 'Pending');  
+    
+
 
 

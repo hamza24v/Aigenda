@@ -3,9 +3,10 @@ package learn.calendar.data;
 import learn.calendar.data.mappers.RoleMapper;
 import learn.calendar.models.Role;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
-
+@Repository
 public class RoleJdbcTemplateRepository implements RoleRepository {
 
     private final JdbcTemplate jdbcTemplate;

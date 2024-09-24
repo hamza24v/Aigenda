@@ -23,8 +23,8 @@ public class AppUserJdbcTemplateRepository implements AppUserRepository {
     @Transactional
     public AppUser findByUsername(String username) {
         List<String> roles = getRolesByUsername(username);
-        final String sql = "select app_user_id, first_name, last_name, email, username, password_hash, disabled "
-                + "from app__user "
+        final String sql = "select app_user_id, first_name, last_name, email, username, password, disabled "
+                + "from app_user "
                 + "where username = ?;";
 
         return jdbcTemplate.query(sql, new AppUserMapper(roles), username)
@@ -34,10 +34,11 @@ public class AppUserJdbcTemplateRepository implements AppUserRepository {
 
     private List<String> getRolesByUsername(String username) {
         final String sql = "select r.name "
-                + "from app_user_role ur "
-                + "inner join role r on ur.app_role_id = r.role_id "
+                + "from calendar_user_role ur "
+                + "inner join role r on ur.role_id = r.role_id "
                 + "inner join app_user au on ur.app_user_id = au.app_user_id "
                 + "where au.username = ?";
-        return jdbcTemplate.query(sql, (rs, rowId) -> rs.getString("role_type"), username);
+        List<String> roleType = jdbcTemplate.query(sql, (rs, rowId) -> rs.getString("role_type"), username);
+        return roleType;
     }
 }

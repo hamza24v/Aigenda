@@ -96,6 +96,7 @@ class EventJdbcTemplateRepositoryTest {
 
     @Test
     void canDeleteById() {
+
         boolean result = repository.deleteById(1);
         assertTrue(result);
 
