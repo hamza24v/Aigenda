@@ -34,30 +34,14 @@ const events = [
 ];
 
 export const MyCalendar = () => {
-  const [myEvents, setMyEvents] = useState(events);
-
-  const handleSelectSlot = ({ start, end }) => {
-    const title = window.prompt("New Event name");
-    if (title) {
-      setMyEvents([
-        ...myEvents,
-        {
-          start,
-          end,
-          title,
-        },
-      ]);
-    }
-  };
 
   return (
     <div className="w-full h-full">
       <Calendar
         localizer={localizer}
-        events={myEvents}
+        events={events}
         startAccessor="start"
         endAccessor="end"
-        onSelectSlot={handleSelectSlot}
         selectable
         style={{ height: "100vh" }}
       />
