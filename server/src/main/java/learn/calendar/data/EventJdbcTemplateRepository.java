@@ -98,6 +98,9 @@ public class EventJdbcTemplateRepository implements EventRepository {
     @Override
     @Transactional
     public boolean deleteById(int eventId) {
+        if(findById(eventId) == null){
+            return false;
+        }
         jdbcTemplate.update("delete from attendee where event_id = ?;", eventId);
         jdbcTemplate.update("delete from invite where event_id = ?;", eventId);
         return jdbcTemplate.update("delete from event where event_id = ?;", eventId) > 0;
