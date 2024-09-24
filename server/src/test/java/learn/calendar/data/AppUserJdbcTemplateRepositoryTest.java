@@ -17,4 +17,10 @@ class AppUserJdbcTemplateRepositoryTest {
         AppUser result = repository.findByUsername("testuser");
         assertEquals(result.getUsername(), "testuser");
     }
+
+    @Test
+    void canfindById() {
+        AppUser result = repository.findById(1);
+        assertEquals(result.getAppUserId(), 1);
+    }
 }

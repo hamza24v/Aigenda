@@ -8,5 +8,10 @@ public interface AppUserRepository {
     AppUser findById(int appUserId);
     @Transactional
     AppUser findByUsername(String username);
+<<<<<<< Updated upstream
 
+=======
+    @Transactional
+    public AppUser findById(int appUserId);
+>>>>>>> Stashed changes
 }
