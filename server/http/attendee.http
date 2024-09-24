@@ -1,0 +1,26 @@
+@url = http://localhost:8080/api/attendee
+@token = eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJidWctc2FmYXJpIiwic3ViIjoiam9obkBzbWl0aC5jb20iLCJhdXRob3JpdGllcyI6IlJPTEVfQURNSU4iLCJleHAiOjE2Mzk3MTQ4OTZ9.SBDSFXdO8UkGsL7lKkQNU0cgBNdUkgRQjBF8GodI52M
+
+GET {{url}} HTTP/1.1
+Authorization: Bearer {{token}}
+
+###
+
+GET {{url}}/1 HTTP/1.1
+Authorization: Bearer {{token}}
+
+###
+
+GET {{url}}/1 HTTP/1.1
+Authorization: Bearer {{token}}
+
+###
+
+DELETE {{url}}/2 HTTP/1.1
+Authorization: Bearer {{token}}
+
+###
+
+DELETE {{url}}/999 HTTP/1.1
+Authorization: Bearer {{token}}
+
