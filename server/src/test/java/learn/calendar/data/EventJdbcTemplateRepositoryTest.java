@@ -79,7 +79,7 @@ class EventJdbcTemplateRepositoryTest {
     @Test
     void canUpdate() {
         Event event = new Event(
-                1,
+                2,
                 "2nd Project Meeting",
                 "Discuss project updates",
                 1,
