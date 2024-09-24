@@ -60,7 +60,7 @@ public class InviteService{
         if(eventRepository.findById(invite.getEvent_id())== null){
             result.addMessage("The event id doesn't exist", ResultType.INVALID);
         }
-        if(eventRepository.findById(invite.getCalendar_id())== null){
+        if(calendarRepository.findById(invite.getCalendar_id())== null){
             result.addMessage("The event id doesn't exist", ResultType.INVALID);
         }
         if(appUserRepository.findById(invite.getUser_id())== null){

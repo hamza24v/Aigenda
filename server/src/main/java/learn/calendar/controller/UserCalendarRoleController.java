@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @CrossOrigin()
-@RequestMapping("/api/calendar")
+@RequestMapping("/api/CalendarRole")
 public class UserCalendarRoleController {
 
     private final UserCalendarRoleService service;
@@ -21,4 +21,5 @@ public class UserCalendarRoleController {
     public UserCalendarRoles findById(@PathVariable int ucrId) {
         return service.findById(ucrId);
     }
+
 }

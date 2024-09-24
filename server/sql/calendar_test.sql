@@ -7,7 +7,7 @@ create table app_user (
 	first_name varchar(60) not null,
     last_name varchar(60) not null,
     email varchar(100) not null,
-	username varchar(100) not null,
+	username varchar(100) not null unique,
 	disabled boolean not null default(0),
 	`password` varchar(2048) not null
 );
@@ -45,7 +45,7 @@ create table attendee (
 
 create table `role` (
     role_id int primary key auto_increment,
-    `name` varchar(50) not null
+    `name` varchar(50) not null unique
 );
 
 create table invite (
@@ -57,6 +57,11 @@ create table invite (
     foreign key (event_id) references event(event_id),
     foreign key (calendar_id) references calendar(calendar_id),
     foreign key (app_user_id) references app_user(app_user_id)
+);
+
+create table user_role (
+	role_id int not null,
+    app_user_id int not null
 );
 
 
