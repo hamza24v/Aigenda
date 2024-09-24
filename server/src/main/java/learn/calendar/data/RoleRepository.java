@@ -12,4 +12,6 @@ public interface RoleRepository {
     Role add(Role role);
 
     boolean update(Role role);
+
+    boolean delete(int roleId);
 }

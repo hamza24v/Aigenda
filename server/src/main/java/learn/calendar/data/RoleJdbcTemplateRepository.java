@@ -60,4 +60,9 @@ public class RoleJdbcTemplateRepository implements RoleRepository {
         return jdbcTemplate.update(sql, role.getName()) > 0;
 
     }
+
+    @Override
+    public boolean delete(int roleId) {
+        return jdbcTemplate.update("delete from role where role_id = ?;", roleId) > 0;
+    }
 }

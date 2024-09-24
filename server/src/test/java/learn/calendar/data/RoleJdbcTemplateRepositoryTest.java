@@ -48,4 +48,21 @@ class RoleJdbcTemplateRepositoryTest {
         Role actual = repository.add(role);
         assertEquals(actual.getId(), 3);
     }
+
+    @Test
+    void shouldDelete() {
+        assertTrue(repository.delete(1));
+    }
+
+    @Test
+    void shouldUpdate() {
+        Role role = new Role();
+        role.setName("Test Name");
+        role.setId(1);
+
+        boolean actual = repository.update(role);
+        assertTrue(actual);
+
+        assertEquals(repository.findById(1).getName(), "Test Name");
+    }
 }
