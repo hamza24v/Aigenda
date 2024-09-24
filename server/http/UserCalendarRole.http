@@ -1,0 +1,5 @@
+@url = http://localhost:8080/api/calendar
+
+
+
+GET {{url}}/1 HTTP/1.1
