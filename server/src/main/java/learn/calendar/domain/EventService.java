@@ -62,8 +62,8 @@ public class EventService {
         return result;
     }
 
-    public boolean deleteById(int attendeeId) {
-        return eventRepository.deleteById(attendeeId);
+    public boolean deleteById(int eventId) {
+        return eventRepository.deleteById(eventId);
     }
     private Result<Event> validate(Event event) {
         Result<Event> result = new Result<>();

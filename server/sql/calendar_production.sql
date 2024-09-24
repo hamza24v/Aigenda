@@ -1,6 +1,6 @@
-drop database if exists calendar_db_test;
-create database calendar_db_test;
-use calendar_db_test;
+drop database if exists calendar_db_production;
+create database calendar_db_production;
+use calendar_db_production;
 
 create table app_user (
 	app_user_id int primary key auto_increment,
@@ -70,38 +70,10 @@ create table calendar_user_role (
     foreign key (role_id) references role(role_id)
 );
 
-delimiter //
-
-create procedure set_known_good_state()
-begin
-    -- Delete from child tables first to prevent foreign key constraint violations
-    delete from calendar_user_role;
-    delete from attendee;
-    delete from invite;
-    delete from `event`;        -- Delete from event before calendar
-
-    -- Now delete from calendar (which references app_user)
-    delete from calendar;
-
-    -- Finally, delete from app_user (after all child records are deleted)
-    delete from app_user;
-
-    -- Delete from role as it's independent of other tables
-    delete from `role`;
-
-    -- Reset auto-increment values
-    alter table calendar_user_role auto_increment = 1;
-    alter table attendee auto_increment = 1;
-    alter table invite auto_increment = 1;
-    alter table `event` auto_increment = 1;
-    alter table calendar auto_increment = 1;
-    alter table app_user auto_increment = 1;
-    alter table `role` auto_increment = 1;
-
-	insert into app_user (app_user_id, first_name, last_name, email, username, disabled, `password`)
+insert into app_user (app_user_id, first_name, last_name, email, username, disabled, `password`)
 	values 
-	(1, 'John', 'Doe', 'john.doe@gmail.com', 'testuser', false, 'password123'),
-	(2, 'Jane', 'Smith', 'jane.smith@gmail.com', 'usertest', false, 'password456');
+	(1, 'John', 'Doe', 'john.doe@gmail.com', 'testuser', false, '$2a$10$ntB7CsRKQzuLoKY3rfoAQen5nNyiC/U60wBsWnnYrtQQi8Z3IZzQa'),
+	(2, 'Jane', 'Smith', 'jane.smith@gmail.com', 'usertest', false, '$2a$10$ntB7CsRKQzuLoKY3rfoAQen5nNyiC/U60wBsWnnYrtQQi8Z3IZzQa');
 
 	insert into calendar (calendar_id, title, `type`, app_user_id)
 	values 
@@ -129,9 +101,5 @@ begin
     values
     (1, 'Pending', 1, 1),
     (2, 'Confirmed', 2, 2);
-    
-end //
 
-delimiter ;
-
-
+select * from attendee;
