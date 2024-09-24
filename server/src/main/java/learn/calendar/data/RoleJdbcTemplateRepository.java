@@ -51,4 +51,13 @@ public class RoleJdbcTemplateRepository implements RoleRepository {
         role.setId(keyHolder.getKey().intValue());
         return role;
     }
+
+    @Override
+    public boolean update(Role role) {
+
+        final String sql = "update role set name = ?;";
+
+        return jdbcTemplate.update(sql, role.getName()) > 0;
+
+    }
 }

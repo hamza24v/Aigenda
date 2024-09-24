@@ -10,4 +10,6 @@ public interface RoleRepository {
     Role findById(int roleId);
 
     Role add(Role role);
+
+    boolean update(Role role);
 }
