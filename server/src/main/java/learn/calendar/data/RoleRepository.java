@@ -8,4 +8,6 @@ public interface RoleRepository {
     List<Role> findAll();
 
     Role findById(int roleId);
+
+    Role add(Role role);
 }

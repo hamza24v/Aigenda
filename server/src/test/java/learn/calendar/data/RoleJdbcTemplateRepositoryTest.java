@@ -1,6 +1,7 @@
 package learn.calendar.data;
 
 import learn.calendar.models.Role;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -8,10 +9,22 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
+
 @SpringBootTest
 class RoleJdbcTemplateRepositoryTest {
+
+
     @Autowired
     RoleJdbcTemplateRepository repository;
+
+    @Autowired
+    KnownGoodState knownGoodState;
+
+
+    @BeforeEach
+    void setup() {knownGoodState.set();}
+
+
     @Test
     void canFindAll() {
         List<Role> roles = repository.findAll();
@@ -22,7 +35,17 @@ class RoleJdbcTemplateRepositoryTest {
 
     @Test
     void findById() {
-        Role r = repository.findById(1);
-        assertEquals(r.getName(),"Admin");
+        Role role = repository.findById(1);
+        assertEquals(role.getName(),"Admin");
+    }
+
+
+    @Test
+    void shouldAdd() {
+        Role role = new Role();
+        role.setName("Owner");
+
+        Role actual = repository.add(role);
+        assertEquals(actual.getId(), 3);
     }
 }
