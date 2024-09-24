@@ -5,9 +5,10 @@ import learn.calendar.data.AttendeeJdbcTemplateRepository;
 import learn.calendar.data.AttendeeRepository;
 import learn.calendar.data.EventRepository;
 import learn.calendar.models.Attendee;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+@Service
 public class AttendeeService {
 
     private AttendeeRepository attendeeRepository;
