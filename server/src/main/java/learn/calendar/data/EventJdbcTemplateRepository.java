@@ -71,6 +71,7 @@ public class EventJdbcTemplateRepository implements EventRepository {
     public boolean update(Event event) {
 
         final String sql = "update event set "
+                + "event_id = ?, "
                 + "title = ?, "
                 + "description = ?, "
                 + "calendar_id = ?, "
@@ -82,6 +83,7 @@ public class EventJdbcTemplateRepository implements EventRepository {
                 + "where event_id = ?;";
 
         return jdbcTemplate.update(sql,
+                event.getEventId(),
                 event.getTitle(),
                 event.getDescription(),
                 event.getCalendarId(),
@@ -96,6 +98,8 @@ public class EventJdbcTemplateRepository implements EventRepository {
     @Override
     @Transactional
     public boolean deleteById(int eventId) {
+        jdbcTemplate.update("delete from attendee where event_id = ?;", eventId);
+        jdbcTemplate.update("delete from invite where event_id = ?;", eventId);
         return jdbcTemplate.update("delete from event where event_id = ?;", eventId) > 0;
     }
 }

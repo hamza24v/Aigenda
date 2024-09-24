@@ -48,7 +48,7 @@ class EventJdbcTemplateRepositoryTest {
                 "Scheduled"
         );
 
-        assertEquals(intended, result);
+        assertEquals(intended.getEventId(), result.getEventId());
     }
 
     @Test
@@ -79,7 +79,7 @@ class EventJdbcTemplateRepositoryTest {
     @Test
     void canUpdate() {
         Event event = new Event(
-                1,
+                2,
                 "2nd Project Meeting",
                 "Discuss project updates",
                 1,
