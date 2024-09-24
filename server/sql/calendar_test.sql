@@ -60,8 +60,8 @@ create table invite (
 );
 
 
-create table calendar_user_role (
-    id int primary key auto_increment,
+create table user_calendar_role (
+    ucr_id int primary key auto_increment,
     app_user_id int not null,
     role_id int not null,
     calendar_id int not null,
@@ -75,7 +75,7 @@ delimiter //
 create procedure set_known_good_state()
 begin
     -- Delete from child tables first to prevent foreign key constraint violations
-    delete from calendar_user_role;
+    delete from user_calendar_role;
     delete from attendee;
     delete from invite;
     delete from `event`;        -- Delete from event before calendar
@@ -90,7 +90,7 @@ begin
     delete from `role`;
 
     -- Reset auto-increment values
-    alter table calendar_user_role auto_increment = 1;
+    alter table user_calendar_role auto_increment = 1;
     alter table attendee auto_increment = 1;
     alter table invite auto_increment = 1;
     alter table `event` auto_increment = 1;
@@ -129,6 +129,11 @@ begin
     values
     (1, 'Pending', 1, 1),
     (2, 'Confirmed', 2, 2);
+    
+    insert into user_calendar_role (ucr_id, app_user_id, role_id, calendar_id)
+    values
+    (1,1,2,1),
+    (2,2,1,1);
     
 end //
 
