@@ -29,7 +29,13 @@ public class AppUser extends User {
                 true, true, true,
                 convertRolesToAuthorities(roles));
         this.appUserId = appUserId;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
     }
+
+
+
 
     public int getAppUserId() {
         return appUserId;
@@ -61,6 +67,14 @@ public class AppUser extends User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public List<String> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<String> roles) {
+        this.roles = roles;
     }
 
     public static List<GrantedAuthority> convertRolesToAuthorities(List<String> roles) {

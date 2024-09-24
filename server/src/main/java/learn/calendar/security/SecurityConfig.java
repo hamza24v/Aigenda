@@ -25,12 +25,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable(); // 1
 
         http.authorizeRequests() // 2
-                .antMatchers("/authenticate").permitAll()
-                .antMatchers("/refresh_token").authenticated()
-                .antMatchers(HttpMethod.GET, "/sighting", "/sighting/*").permitAll()
-                .antMatchers(HttpMethod.POST, "/sighting").hasAnyRole("USER", "ADMIN")
-                .antMatchers(HttpMethod.PUT, "/sighting/*").hasAnyRole("USER", "ADMIN")
-                .antMatchers(HttpMethod.DELETE, "/sighting/*").hasRole("ADMIN")
+                .antMatchers("/api/user/authenticate").permitAll()
+                .antMatchers("/api/user/register").permitAll()
+                .anyRequest().authenticated()
                 .and()
                 .addFilter(new JwtRequestFilter(authenticationManager(), converter)) // 3
                 .sessionManagement() // 4

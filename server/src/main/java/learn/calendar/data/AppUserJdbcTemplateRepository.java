@@ -40,7 +40,7 @@ public class AppUserJdbcTemplateRepository implements AppUserRepository {
     @Override
     public AppUser add(AppUser appUser) {
         final String sql = "insert into app_user (first_name, last_name, email, username, password) "
-                + "values (?,?,?,?,?,?);";
+                + "values (?,?,?,?,?);";
 
         GeneratedKeyHolder keyHolder = new GeneratedKeyHolder();
         int rowsAffected = jdbcTemplate.update(connection -> {
@@ -79,17 +79,16 @@ public class AppUserJdbcTemplateRepository implements AppUserRepository {
 
     private List<String> getRolesByUsername(String username) {
         final String sql = "select r.name "
-                + "from calendar_user_role ur "
-                + "inner join role r on ur.role_id = r.role_id "
-                + "inner join app_user au on ur.app_user_id = au.app_user_id "
+                + "from user_role ur "
+                + "inner join role r on ucr.role_id = r.role_id "
+                + "inner join app_user au on ucr.app_user_id = au.app_user_id "
                 + "where au.username = ?";
-        List<String> roleType = jdbcTemplate.query(sql, (rs, rowId) -> rs.getString("role_type"), username);
-        return roleType;
+        return jdbcTemplate.query(sql, (rs, rowId) -> rs.getString("name"), username);
     }
 
     private List<String> getRolesByUserId(int appUserId) {
         final String sql = "select r.name "
-                + "from calendar_user_role ur "
+                + "from user_role ur "
                 + "inner join role r on ur.role_id = r.role_id "
                 + "inner join app_user au on ur.app_user_id = au.app_user_id "
                 + "where au.app_user_id = ?";
@@ -98,7 +97,7 @@ public class AppUserJdbcTemplateRepository implements AppUserRepository {
 
     private void updateRoles(AppUser user) {
         // delete all roles, then re-add
-        jdbcTemplate.update("delete from app_user_role where app_user_id = ?;", user.getAppUserId());
+        jdbcTemplate.update("delete from user_role where app_user_id = ?;", user.getAppUserId());
 
         Collection<GrantedAuthority> authorities = user.getAuthorities();
 
@@ -107,8 +106,8 @@ public class AppUserJdbcTemplateRepository implements AppUserRepository {
         }
 
         for (String role : AppUser.convertAuthoritiesToRoles(authorities)) {
-            String sql = "insert into app_user_role (app_user_id, app_role_id) "
-                    + "select ?, app_role_id from app_role where `name` = ?;";
+            String sql = "insert into user_role (app_user_id, role_id) "
+                    + "select ?, role_id from role where `name` = ?;";
             jdbcTemplate.update(sql, user.getAppUserId(), role);
         }
     }
