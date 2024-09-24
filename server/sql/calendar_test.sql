@@ -117,8 +117,8 @@ begin
 		
 	insert into `role` (role_id, `name`)
 	values 
-	('Admin'),
-	('User');
+	(1,'Admin'),
+	(2, 'User');
 
 	insert into attendee (event_id, app_user_id, status)
 	values
