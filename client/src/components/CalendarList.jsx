@@ -1,6 +1,6 @@
 import React from "react";
 
-function CalendarList({ title, calendars }) {
+export const CalendarList = ({ title, calendars }) => {
   return (
     <div className="p-4">
       <div className="flex justify-between">
@@ -15,7 +15,6 @@ function CalendarList({ title, calendars }) {
             id="title"
             name="title"
             value={calendar.title}
-            
           />
           <label for="title" className="pl-4">{calendar.title}</label>
           <br />
@@ -25,4 +24,3 @@ function CalendarList({ title, calendars }) {
   );
 }
 
-export default CalendarList;
