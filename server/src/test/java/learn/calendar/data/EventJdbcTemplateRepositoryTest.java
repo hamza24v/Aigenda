@@ -23,7 +23,7 @@ class EventJdbcTemplateRepositoryTest {
 
     @BeforeEach
     void setup() {
-        //   knownGoodState.set();
+        knownGoodState.set();
     }
     @Test
     void canFindAll() {
