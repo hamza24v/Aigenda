@@ -32,7 +32,6 @@ public class AppUserJdbcTemplateRepository implements AppUserRepository {
                 .findFirst().orElse(null);
     }
 
-
     private List<String> getRolesByUsername(String username) {
         final String sql = "select r.name "
                 + "from app_user_role ur "

@@ -63,7 +63,6 @@ public class AppUser extends User {
         this.email = email;
     }
 
-
     public static List<GrantedAuthority> convertRolesToAuthorities(List<String> roles) {
         List<GrantedAuthority> authorities = new ArrayList<>(roles.size());
         for (String role : roles) {
