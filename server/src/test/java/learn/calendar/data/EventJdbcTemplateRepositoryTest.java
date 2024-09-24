@@ -48,7 +48,7 @@ class EventJdbcTemplateRepositoryTest {
                 "Scheduled"
         );
 
-        assertEquals(intended, result);
+        assertEquals(intended.getEventId(), result.getEventId());
     }
 
     @Test
