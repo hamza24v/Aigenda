@@ -48,8 +48,8 @@ create table `role` (
     `name` varchar(50) not null
 );
 
-create table invitation (
-	invitation_id int primary key auto_increment,
+create table invite (
+	invite_id int primary key auto_increment,
     event_id int,
     calendar_id int,
     app_user_id int,
@@ -77,7 +77,7 @@ begin
     -- Delete from child tables first to prevent foreign key constraint violations
     delete from calendar_user_role;
     delete from attendee;
-    delete from invitation;
+    delete from invite;
     delete from `event`;        -- Delete from event before calendar
 
     -- Now delete from calendar (which references app_user)
@@ -92,7 +92,7 @@ begin
     -- Reset auto-increment values
     alter table calendar_user_role auto_increment = 1;
     alter table attendee auto_increment = 1;
-    alter table invitation auto_increment = 1;
+    alter table invite auto_increment = 1;
     alter table `event` auto_increment = 1;
     alter table calendar auto_increment = 1;
     alter table app_user auto_increment = 1;
@@ -120,10 +120,15 @@ begin
 	(1, 'Admin'),
 	(2, 'User');
 
-	insert into attendee (event_id, app_user_id, status)
+	insert into attendee (event_id, app_user_id, `status`)
 	values
 	(1, 1, 'Confirmed'), 
 	(2, 2, 'Pending');  
+    
+    insert into invite (invite_id, `status`, app_user_id, event_id)
+    values
+    (1, 'Pending', 1, 1),
+    (2, 'Confirmed', 2, 2);
     
 end //
 
