@@ -80,8 +80,8 @@ public class AppUserJdbcTemplateRepository implements AppUserRepository {
     private List<String> getRolesByUsername(String username) {
         final String sql = "select r.name "
                 + "from user_role ur "
-                + "inner join role r on ucr.role_id = r.role_id "
-                + "inner join app_user au on ucr.app_user_id = au.app_user_id "
+                + "inner join role r on ur.role_id = r.role_id "
+                + "inner join app_user au on ur.app_user_id = au.app_user_id "
                 + "where au.username = ?";
         return jdbcTemplate.query(sql, (rs, rowId) -> rs.getString("name"), username);
     }
