@@ -39,6 +39,22 @@ class InviteJdbcTemplateRepositoryTest {
     }
 
     @Test
+    void shouldAddInvite() {
+        Invite newInvite = new Invite();
+        newInvite.setEvent_id(1);
+        newInvite.setUser_id(1);
+        newInvite.setCalendar_id(1);
+        newInvite.setStatus("Sent");
+        Invite addedInvite = repository.add(newInvite);
+
+        assertNotNull(addedInvite);
+        assertEquals(newInvite.getEvent_id(), addedInvite.getEvent_id());
+        assertEquals(newInvite.getUser_id(), addedInvite.getUser_id());
+        assertEquals(newInvite.getStatus(), addedInvite.getStatus());
+
+    }
+
+    @Test
     void shouldDelete() {
         assertTrue(repository.delete(1));
         assertEquals(repository.findAll().size(), 1);
