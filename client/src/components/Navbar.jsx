@@ -1,6 +1,9 @@
 import { NavLink } from "react-router-dom";
+import { useUser } from '../contexts/UserContext';
 
 function Navbar() {
+  const { user } = useUser();
+  if (!user) return null;
   return (
     <nav className="relative w-full shadow-md p-4 z-50">
       <div className="flex justify-start text-xl items-center max-w-7xl mx-auto">

@@ -61,6 +61,57 @@ const CALENDERS = [
     },
   ];
 
+const REGISTRATION_FORM = [
+    {
+        label: 'First Name',
+        name: 'firstName',
+        placeholder: 'Enter First Name',
+        required: true
+    },
+    {
+        label: 'Last Name',
+        name: 'lastName',
+        placeholder: 'Enter Last Name',
+        required: true
+    },
+    {
+        label: 'User Name',
+        name: 'username',
+        placeholder: 'Enter User Name',
+        required: true,
+    },
+    {
+        label: 'Email',
+        name: 'email',
+        type: 'email',
+        placeholder: 'Enter Email',
+        required: true
+    },
+    {
+        label: 'Password',
+        name: 'password',
+        type: 'password',
+        placeholder: 'Enter Password',
+        required: true
+    }
+]
+
+const LOGIN_FORM = [
+    {
+        label: 'User Name',
+        name: 'username',
+        placeholder: 'Enter User Name',
+        required: true,
+    },
+    {
+        label: 'Password',
+        name: 'password',
+        type: 'password',
+        placeholder: 'Enter Password',
+        required: true
+    }
+]
 
 
-export { EVENT_FORM, CALENDER_FORM, CALENDERS }
+
+export { EVENT_FORM, CALENDER_FORM, CALENDERS, REGISTRATION_FORM, LOGIN_FORM }
