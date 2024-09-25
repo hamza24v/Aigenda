@@ -23,7 +23,7 @@ export const CalendarsProvider = ({ children }) => {
 
   const createCalendar = async (calendar) => {
     apiService
-      .create("calendars", calendar)
+      .post("calendars", calendar)
       .then((data) => {
         if (!data.calendarsId) {
           setCalendarErrors(data);
@@ -39,7 +39,8 @@ export const CalendarsProvider = ({ children }) => {
       if (data) {
         setCalendarErrors(data);
       }
-    });
+    })
+    .catch(console.log);
   };
 
   const deleteCalendar = async (id) => {

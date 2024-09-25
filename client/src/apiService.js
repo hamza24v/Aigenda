@@ -20,7 +20,7 @@ async function get(endpoint, id){
   });
 }
 
-async function create(endpoint, data) {
+async function post(endpoint, data) {
   return fetch(`${BASE_URL}/${endpoint}`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -65,7 +65,7 @@ async function remove(endpoint, id) {
 export default {
   getAll,
   get,
-  create,
+  post,
   update,
   remove
 };

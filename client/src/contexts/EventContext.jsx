@@ -22,7 +22,7 @@ export const EventsProvider = ({ children }) => {
 
   const createEvent = async (event) => {
     apiService
-      .create("events", event)
+      .post("events", event)
       .then((data) => {
         if (!data.eventId) {
           setEventErrors(data);
@@ -34,11 +34,14 @@ export const EventsProvider = ({ children }) => {
 
   const updateEvent = (event, id) => {
     event.eventId = id;
-    apiService.update("events", id, event).then((data) => {
-      if (data) {
-        setEventErrors(data);
-      }
-    });
+    apiService
+      .update("events", id, event)
+      .then((data) => {
+        if (data) {
+          setEventErrors(data);
+        }
+      })
+      .catch(console.log);
   };
 
   const deleteEvent = async (id) => {

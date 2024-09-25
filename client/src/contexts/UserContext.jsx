@@ -9,30 +9,36 @@ export const UserContext = createContext();
 export const UserProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [userErrors, setUserErrors] = useState([]);
-  const { create, update, remove } = apiService;
+  const { post, remove } = apiService;
 
   const registerUser = async (user) => {
-    create("user/register", user)
-      .then((data) => {
-        if (!data.eventId) {
+    post("user/register", user)
+      .then(data => {
+        if (data.appUserId) {
+          setUser(data);
+        } else {
           setUserErrors(data);
         }
       })
       .catch(console.log);
   };
-  
+
   const loginUser = async (user) => {
-    update("user/authenticate", user).then((data) => {
-      if (data) {
-        setUserErrors(data);
-      }
-    });
+    post("user/authenticate", user)
+      .then((data) => {
+        if (data.jwt_token) {
+            setUser({user, ...data});
+          } else {
+            setUserErrors(data);
+          }
+      })
+      .catch(console.log);
   };
 
   const deleteUser = async (id) => {
     remove("user", eventId, user.roles) // only 'owner' can delete users
       .then(() => {
-        setUser((prevEvents) => prevEvents.filter((e) => e.eventId !== id));
+        setUser((prevEvents) => prevEvents.filter((a) => a.appUserId !== id));
       })
       .catch(console.log);
   };
