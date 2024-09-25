@@ -10,7 +10,7 @@ public class UserCalendarRolesMapper implements RowMapper<UserCalendarRoles> {
     @Override
     public UserCalendarRoles mapRow(ResultSet resultSet, int i) throws SQLException {
         UserCalendarRoles userCalendarRoles = new UserCalendarRoles();
-        userCalendarRoles.setId(resultSet.getInt("ucr_id"));
+        userCalendarRoles.setUcrId(resultSet.getInt("ucr_id"));
         userCalendarRoles.setRoleId(resultSet.getInt("role_id"));
         userCalendarRoles.setCalendarId(resultSet.getInt("calendar_id"));
         userCalendarRoles.setUserId(resultSet.getInt("app_user_id"));

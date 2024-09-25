@@ -28,6 +28,14 @@ public class UserCalendarRolesJdbcTemplateRepository implements UserCalendarRole
         return userCalendarRoles;
     }
 
+    @Override
+    public UserCalendarRoles findRoleByUserIdAndCalendarId(int userId, int calendarId) {
+        final String sql = "select * from user_calendar_role where app_user_id = ? and calendar_id = ?;";
+        UserCalendarRoles userCalendarRoles = jdbcTemplate.query(sql, new UserCalendarRolesMapper(), userId, calendarId)
+                .stream().findFirst().orElse(null);
+
+        return userCalendarRoles;
+    }
 
     @Override
     public UserCalendarRoles add(UserCalendarRoles userCalendarRoles) {
@@ -46,12 +54,17 @@ public class UserCalendarRolesJdbcTemplateRepository implements UserCalendarRole
             return null;
         }
 
-        userCalendarRoles.setId(keyHolder.getKey().intValue());
+        userCalendarRoles.setUcrId(keyHolder.getKey().intValue());
         return userCalendarRoles;
     }
 
     @Override
     public boolean delete(int ucrId){
         return jdbcTemplate.update("delete from user_calendar_role where ucr_id = ?;", ucrId) > 0;
+    }
+
+    @Override
+    public boolean deleteByUserIdandCalendarId(int userId, int calendarId) {
+        return jdbcTemplate.update("delete from user_calendar_role where app_user_id = ? and calendar_id = ?;", userId, calendarId) > 0;
     }
 }

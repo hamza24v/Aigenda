@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @CrossOrigin()
-@RequestMapping("/api/CalendarRole")
+@RequestMapping("/api/UserCalendarRole")
 public class UserCalendarRoleController {
 
     private final UserCalendarRoleService service;

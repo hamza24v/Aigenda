@@ -3,7 +3,7 @@ package learn.calendar.models;
 import java.util.Objects;
 
 public class UserCalendarRoles {
-    private int id;
+    private int ucrId;
     private int userId;
     private int calendarId; //TODO: 
     private int roleId;
@@ -11,19 +11,19 @@ public class UserCalendarRoles {
     public UserCalendarRoles() {
     }
 
-    public UserCalendarRoles(int id, int userId, int calendarId, int roleId) {
-        this.id = id;
+    public UserCalendarRoles(int ucrId, int userId, int calendarId, int roleId) {
+        this.ucrId = ucrId;
         this.userId = userId;
         this.calendarId = calendarId;
         this.roleId = roleId;
     }
 
-    public int getId() {
-        return id;
+    public int getUcrId() {
+        return ucrId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setUcrId(int ucrId) {
+        this.ucrId = ucrId;
     }
 
     public int getUserId() {
@@ -55,11 +55,11 @@ public class UserCalendarRoles {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         UserCalendarRoles that = (UserCalendarRoles) o;
-        return id == that.id && userId == that.userId && calendarId == that.calendarId && roleId == that.roleId;
+        return getUcrId() == that.getUcrId() && getUserId() == that.getUserId() && getCalendarId() == that.getCalendarId() && getRoleId() == that.getRoleId();
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, userId, calendarId, roleId);
+        return Objects.hash(getUcrId(), getUserId(), getCalendarId(), getRoleId());
     }
 }

@@ -3,9 +3,15 @@ package learn.calendar.security;
 
 import learn.calendar.data.AppUserRepository;
 import learn.calendar.data.CalendarRepository;
+import learn.calendar.data.UserCalendarRolesRepository;
+import learn.calendar.domain.Result;
+import learn.calendar.domain.ResultType;
+import learn.calendar.domain.Validations;
 import learn.calendar.models.AppUser;
 import learn.calendar.models.CalType;
 import learn.calendar.models.Calendar;
+import learn.calendar.models.UserCalendarRoles;
+import org.springframework.security.core.parameters.P;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -19,11 +25,13 @@ import java.util.List;
 public class AppUserService implements UserDetailsService {
     private final AppUserRepository userRepository;
     private final CalendarRepository calendarRepository;
+    private final UserCalendarRolesRepository userCalendarRolesRepository;
     private final PasswordEncoder encoder;
 
-    public AppUserService(AppUserRepository userRepository, CalendarRepository calendarRepository, PasswordEncoder encoder) {
+    public AppUserService(AppUserRepository userRepository, CalendarRepository calendarRepository, UserCalendarRolesRepository userCalendarRolesRepository, PasswordEncoder encoder) {
         this.userRepository = userRepository;
         this.calendarRepository = calendarRepository;
+        this.userCalendarRolesRepository = userCalendarRolesRepository;
         this.encoder = encoder;
     }
 
@@ -38,16 +46,26 @@ public class AppUserService implements UserDetailsService {
         return appUser;
     }
 
-    public AppUser create(String username, String password, AppUser user) {
+    public Result<AppUser> create(String username, String password, AppUser user) {
         validate(username);
         validatePassword(password);
-
         password = encoder.encode(password);
 
         user = new AppUser(0, user.getFirstName(), user.getLastName(), user.getEmail(), username, password, false, List.of("USER"));
-        AppUser result = userRepository.add(user);
-        Calendar calendar = new Calendar(0,result.getFirstName() + " " + result.getLastName(), CalType.PERSONAL, result.getAppUserId());
+        Result<AppUser> result = validateUser(user);
+        if (!result.isSuccess()) {
+            return result;
+        }
+        if (user.getAppUserId() != 0) {
+            result.addMessage("userId cannot be set for 'add' operation", ResultType.INVALID);
+            return result;
+        }
+        user = userRepository.add(user);
+        result.setPayload(user);
+        Calendar calendar = new Calendar(0,user.getFirstName() + " " + user.getLastName(), CalType.PERSONAL, user.getAppUserId());
         calendarRepository.add(calendar);
+        UserCalendarRoles userCalendarRole = new UserCalendarRoles(0,user.getAppUserId(), calendar.getCalendarId(), 3);
+        userCalendarRolesRepository.add(userCalendarRole);
         return result;
     }
 
@@ -55,6 +73,7 @@ public class AppUserService implements UserDetailsService {
         if (username == null || username.isBlank()) {
             throw new ValidationException("username is required");
         }
+
 
         if (username.length() > 50) {
             throw new ValidationException("username must be less than 50 characters");
@@ -82,5 +101,24 @@ public class AppUserService implements UserDetailsService {
         if (digits == 0 || letters == 0 || others == 0) {
             throw new ValidationException("password must contain a digit, a letter, and a non-digit/non-letter");
         }
+    }
+
+    private Result<AppUser> validateUser(AppUser user) {
+        Result<AppUser> result = new Result<>();
+        if (user == null) {
+            result.addMessage("user cannot be null", ResultType.INVALID);
+            return result;
+        }
+        if (Validations.isNullOrBlank(user.getFirstName())) {
+            result.addMessage("firstName is required", ResultType.INVALID);
+        }
+        if (Validations.isNullOrBlank(user.getLastName())) {
+            result.addMessage("lastName is required", ResultType.INVALID);
+        }
+        if (Validations.isNullOrBlank(user.getEmail())) {
+            result.addMessage("email is required", ResultType.INVALID);
+        }
+
+        return result;
     }
 }

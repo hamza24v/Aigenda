@@ -1,0 +1,47 @@
+@url = http://localhost:8080/api/invite
+@token = eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJjYWxlbmRhciIsInN1YiI6InRlc3RAam9uZXMuY29tIiwiYXV0aG9yaXRpZXMiOiJST0xFX1VzZXIiLCJleHAiOjE3MjcyMzAyODF9.0HLx2lLMldYC--_IBSwLxZwFPH1I0E5bfCg5tmu7y_A
+GET {{url}} HTTP/1.1
+Authorization: Bearer {{token}}
+
+###
+
+GET {{url}}/1 HTTP/1.1
+Authorization: Bearer {{token}}
+
+###
+
+POST {{url}} HTTP/1.1
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{   
+    "event_id": 1,
+    "user_id": 1,
+    "calendar_id": 1,
+    "status": "Pending"
+}
+
+
+###
+
+#invalid, status is blank
+POST {{url}} HTTP/1.1
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{   
+    "event_id": 1,
+    "user_id": 1,
+    "calendar_id": 1,
+    "status": ""
+}
+
+###
+
+DELETE {{url}}/2 HTTP/1.1
+Authorization: Bearer {{token}}
+
+###
+
+DELETE {{url}}/999 HTTP/1.1
+Authorization: Bearer {{token}}
