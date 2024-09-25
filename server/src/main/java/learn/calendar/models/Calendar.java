@@ -4,12 +4,12 @@ import java.util.Objects;
 
 public class Calendar {
     private String title;
-    private int id;
+    private int calendarId;
     private CalType type;
     private int userId;
 
-    public Calendar(int id, String title, CalType type, int userId) {
-        this.id = id;
+    public Calendar(int calendarId, String title, CalType type, int userId) {
+        this.calendarId = calendarId;
         this.title = title;
         this.type = type;
         this.userId = userId;
@@ -25,12 +25,12 @@ public class Calendar {
         this.title = title;
     }
 
-    public int getId() {
-        return id;
+    public int getCalendarId() {
+        return calendarId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setCalendarId(int calendarId) {
+        this.calendarId = calendarId;
     }
 
     public CalType getType() {
@@ -41,11 +41,11 @@ public class Calendar {
         this.type = type;
     }
 
-    public int getUser() {
+    public int getUserId() {
         return userId;
     }
 
-    public void setUser(int userId) {
+    public void setUserId(int userId) {
         this.userId = userId;
     }
 
@@ -54,11 +54,11 @@ public class Calendar {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Calendar calendar = (Calendar) o;
-        return id == calendar.id && Objects.equals(title, calendar.title) && type == calendar.type && userId == calendar.userId;
+        return getCalendarId() == calendar.getCalendarId() && getUserId() == calendar.getUserId() && Objects.equals(getTitle(), calendar.getTitle()) && getType() == calendar.getType();
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(title, id, type, userId);
+        return Objects.hash(getTitle(), getCalendarId(), getType(), getUserId());
     }
 }

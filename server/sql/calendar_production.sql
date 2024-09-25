@@ -7,7 +7,7 @@ create table app_user (
 	first_name varchar(60) not null,
     last_name varchar(60) not null,
     email varchar(100) not null,
-	username varchar(100) not null,
+	username varchar(100) not null unique,
 	disabled boolean not null default(0),
 	`password` varchar(2048) not null
 );
@@ -20,7 +20,7 @@ create table calendar (
     foreign key (app_user_id) references app_user(app_user_id)
 );
 
-create table event (
+create table `event` (
     event_id int primary key auto_increment,
     title varchar(100) not null,
     `description` varchar(255) not null,
@@ -30,7 +30,7 @@ create table event (
     start_time datetime not null,
     end_time datetime not null,
     `status` varchar(50) not null,
-    foreign key (calendar_id) references calendar(calendar_id),
+    foreign key (calendar_id) references calendar(calendar_id) on delete cascade,
     foreign key (app_user_id) references app_user(app_user_id)
 );
 
@@ -39,7 +39,7 @@ create table attendee (
     event_id int,
     app_user_id int,
     `status` varchar(50) not null,
-    foreign key (event_id) references event(event_id),
+    foreign key (event_id) references event(event_id) on delete cascade,
     foreign key (app_user_id) references app_user(app_user_id)
 );
 
@@ -54,8 +54,8 @@ create table invite (
     calendar_id int,
     app_user_id int,
     `status` varchar(50) not null,
-    foreign key (event_id) references event(event_id),
-    foreign key (calendar_id) references calendar(calendar_id),
+    foreign key (event_id) references `event`(event_id) on delete cascade,
+    foreign key (calendar_id) references calendar(calendar_id) on delete cascade,
     foreign key (app_user_id) references app_user(app_user_id)
 );
 
@@ -70,7 +70,7 @@ create table user_calendar_role (
     role_id int not null,
     calendar_id int not null,
     foreign key (app_user_id) references app_user(app_user_id),
-    foreign key (calendar_id) references calendar(calendar_id),
+    foreign key (calendar_id) references calendar(calendar_id) on delete cascade,
     foreign key (role_id) references role(role_id)
 );
 
@@ -94,7 +94,9 @@ insert into app_user (app_user_id, first_name, last_name, email, username, disab
 	insert into `role` (role_id, `name`)
 	values 
 	(1, 'Admin'),
-	(2, 'User');
+	(2, 'User'),
+    (3, 'Owner'),
+    (4, 'Viewer');
 
 	insert into attendee (event_id, app_user_id, `status`)
 	values
@@ -105,5 +107,11 @@ insert into app_user (app_user_id, first_name, last_name, email, username, disab
     values
     (1, 'Pending', 1, 1),
     (2, 'Confirmed', 2, 2);
+    
+    insert into user_calendar_role (ucr_id, app_user_id, role_id, calendar_id)
+    values
+    (1,1,2,1),
+    (2,2,1,1),
+    (3,3,4,1);
 
 select * from attendee;

@@ -14,12 +14,12 @@ public class CalendarMapper implements RowMapper<Calendar> {
     @Override
     public Calendar mapRow(ResultSet resultSet, int i) throws SQLException {
         Calendar calendar = new Calendar();
-        calendar.setId(resultSet.getInt("calendar_id"));
+        calendar.setCalendarId(resultSet.getInt("calendar_id"));
         calendar.setTitle(resultSet.getString("title"));
         String typeString = resultSet.getString("type");
         CalType type = CalType.valueOf(typeString.toUpperCase());
         calendar.setType(type);
-        calendar.setUser(resultSet.getInt("app_user_id"));
+        calendar.setUserId(resultSet.getInt("app_user_id"));
 
         return calendar;
     }

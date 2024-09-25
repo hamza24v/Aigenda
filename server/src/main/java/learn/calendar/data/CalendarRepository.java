@@ -7,6 +7,8 @@ import java.util.List;
 public interface CalendarRepository {
     List<Calendar> findAll();
 
+    List<Calendar> findAllCalendarsForUser(int userId);
+
     Calendar findById(int calendarId);
 
     Calendar add(Calendar calendar);

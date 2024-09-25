@@ -3,12 +3,14 @@ package learn.calendar.security;
 
 import learn.calendar.data.AppUserRepository;
 import learn.calendar.data.CalendarRepository;
+import learn.calendar.data.UserCalendarRolesRepository;
 import learn.calendar.domain.Result;
 import learn.calendar.domain.ResultType;
 import learn.calendar.domain.Validations;
 import learn.calendar.models.AppUser;
 import learn.calendar.models.CalType;
 import learn.calendar.models.Calendar;
+import learn.calendar.models.UserCalendarRoles;
 import org.springframework.security.core.parameters.P;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -23,11 +25,13 @@ import java.util.List;
 public class AppUserService implements UserDetailsService {
     private final AppUserRepository userRepository;
     private final CalendarRepository calendarRepository;
+    private final UserCalendarRolesRepository userCalendarRolesRepository;
     private final PasswordEncoder encoder;
 
-    public AppUserService(AppUserRepository userRepository, CalendarRepository calendarRepository, PasswordEncoder encoder) {
+    public AppUserService(AppUserRepository userRepository, CalendarRepository calendarRepository, UserCalendarRolesRepository userCalendarRolesRepository, PasswordEncoder encoder) {
         this.userRepository = userRepository;
         this.calendarRepository = calendarRepository;
+        this.userCalendarRolesRepository = userCalendarRolesRepository;
         this.encoder = encoder;
     }
 
@@ -60,6 +64,8 @@ public class AppUserService implements UserDetailsService {
         result.setPayload(user);
         Calendar calendar = new Calendar(0,user.getFirstName() + " " + user.getLastName(), CalType.PERSONAL, user.getAppUserId());
         calendarRepository.add(calendar);
+        UserCalendarRoles userCalendarRole = new UserCalendarRoles(0,user.getAppUserId(), calendar.getCalendarId(), 3);
+        userCalendarRolesRepository.add(userCalendarRole);
         return result;
     }
 

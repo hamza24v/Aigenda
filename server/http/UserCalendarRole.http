@@ -1,9 +1,6 @@
-@url = http://localhost:8080/api/CalendarRole
-@token = eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJjYWxlbmRhciIsInN1YiI6InRlc3RAam9uZXMuY29tIiwiYXV0aG9yaXRpZXMiOiJST0xFX1VTRVIiLCJleHAiOjE3MjcyMTY5NzR9.tLp59i9bdTg4Uj4TuI6Vx9dc6UkEGntXrPZuiWlb0Pc
-
+@url = http://localhost:8080/api/UserCalendarRole
+@token = eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJjYWxlbmRhciIsInN1YiI6InRlc3RAam9uZXMuY29tIiwiYXV0aG9yaXRpZXMiOiJST0xFX1VzZXIiLCJleHAiOjE3MjcyMzY4MDh9.gu0nNSP35TAgqudbLwAKDkUKwxWWDt9p_ySEcT4annA
 GET {{url}}/1 HTTP/1.1
 Authorization: Bearer {{token}}
 
 ###
-
-POST
