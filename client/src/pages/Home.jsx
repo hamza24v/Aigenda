@@ -20,7 +20,7 @@ function Home() {
      
     }
   },[user])
-  console.log(user);
+  //console.log(user);
   return (
     <div className="flex flex-col sm:flex-row  min-h-screen">
       <div className="sm:w-1/4">
