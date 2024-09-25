@@ -59,9 +59,13 @@ create table invite (
     foreign key (app_user_id) references app_user(app_user_id)
 );
 
+create table user_role (
+	role_id int not null,
+    app_user_id int not null
+);
 
-create table calendar_user_role (
-    id int primary key auto_increment,
+create table user_calendar_role (
+    ucr_id int primary key auto_increment,
     app_user_id int not null,
     role_id int not null,
     calendar_id int not null,
