@@ -35,8 +35,6 @@ public class AppUser extends User {
     }
 
 
-
-
     public int getAppUserId() {
         return appUserId;
     }

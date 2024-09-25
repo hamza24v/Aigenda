@@ -43,6 +43,8 @@ public class AppUserService implements UserDetailsService {
             throw new UsernameNotFoundException(username + "not found");
         }
 
+
+        System.out.println(appUser.getRoles());
         return appUser;
     }
 

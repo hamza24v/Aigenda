@@ -86,7 +86,7 @@ public class AuthController {
         return new ResponseEntity<>(map, HttpStatus.CREATED);
     }
 
-    @PostMapping("/delete/{userId}")
+    @DeleteMapping("/delete/{userId}")
     public ResponseEntity<?> deleteAccount(@PathVariable int userId) {
         if (appUserService.deleteById(userId)) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);

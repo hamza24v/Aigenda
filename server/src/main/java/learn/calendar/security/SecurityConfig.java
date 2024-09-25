@@ -27,8 +27,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests() // 2
                 .antMatchers("/api/user/authenticate").permitAll()
                 .antMatchers("/api/user/register").permitAll()
-                .antMatchers("/api/user/delete").hasRole("ADMIN")
-                .antMatchers("/api/user/").hasRole("ADMIN")
+                .antMatchers(HttpMethod.DELETE,"/api/user/delete/*").hasRole("ADMIN")
                 .anyRequest().authenticated()
                 .and()
                 .addFilter(new JwtRequestFilter(authenticationManager(), converter)) // 3

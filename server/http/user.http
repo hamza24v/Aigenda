@@ -1,5 +1,5 @@
 @url = http://localhost:8080/api/user
-@token = eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJjYWxlbmRhciIsInN1YiI6InRlc3RAam9uZXMuY29tIiwiYXV0aG9yaXRpZXMiOiJST0xFX1VzZXIiLCJleHAiOjE3MjcyODA3NDV9.ny26a797g0ceNN2FDYAuk6Pu6aZ0-rfi3cMNdsU6K10
+@token = eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJjYWxlbmRhciIsInN1YiI6IkFETUlOIiwiYXV0aG9yaXRpZXMiOiJST0xFX0FETUlOIiwiZXhwIjoxNzI3MjkxNzU2fQ.B_-kloLbJmUnO04ClmoQ4PfhRUyyja_Kod0r5HgyhRw
 
 
 POST {{url}}/authenticate HTTP/1.1
@@ -39,5 +39,5 @@ Content-Type: application/json
 }
 
 ###
-DELETE {{url}}/delete/2 HTTP/1.1
+DELETE {{url}}/delete/6 HTTP/1.1
 Authorization: Bearer {{token}}
