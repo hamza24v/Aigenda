@@ -50,7 +50,7 @@ export const CalendarList = ({ title }) => {
           open={showModal}
           onClose={() => setShowModal(false)}
         >
-          <Form fields={CALENDER_FORM} onSubmit={handleSubmit} />
+          <Form fields={CALENDER_FORM} onSubmit={handleSubmit} submitText="Create Calendar"/>
         </PopupModal>
       )}
     </div>

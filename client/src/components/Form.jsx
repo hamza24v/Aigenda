@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-export const Form = ({ fields, onSubmit }) => {
+export const Form = ({ fields, onSubmit, submitText }) => {
     
     const [form, setForm] = useState([]);
 
@@ -53,10 +53,10 @@ export const Form = ({ fields, onSubmit }) => {
       ))}
       <button
         type="submit"
-        className="bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700 transition duration-200"
+        className="bg-indigo-600 text-white py-2 px-4 w-full mx-auto text-center rounded-md hover:bg-indigo-700 transition duration-200"
         on
       >
-        Save
+        {submitText}
       </button>
     </form>
   )
