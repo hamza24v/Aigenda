@@ -13,4 +13,5 @@ public interface AppUserRepository {
     @Transactional
     public AppUser findById(int appUserId);
 
+    boolean deleteUserById(int userId);
 }

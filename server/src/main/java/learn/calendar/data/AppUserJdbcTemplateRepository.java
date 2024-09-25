@@ -77,6 +77,11 @@ public class AppUserJdbcTemplateRepository implements AppUserRepository {
                 .findFirst().orElse(null);
     }
 
+    @Override
+    public boolean deleteUserById(int userId) {
+        return jdbcTemplate.update("delete from app_user where app_user_id = ?;",userId) > 0;
+    }
+
     private List<String> getRolesByUsername(String username) {
         final String sql = "select r.name "
                 + "from user_role ur "

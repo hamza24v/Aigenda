@@ -69,6 +69,11 @@ public class AppUserService implements UserDetailsService {
         return result;
     }
 
+    public boolean deleteById(int userId) {
+        return userRepository.deleteUserById(userId);
+
+    }
+
     private void validate(String username) {
         if (username == null || username.isBlank()) {
             throw new ValidationException("username is required");
