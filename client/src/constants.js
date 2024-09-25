@@ -96,6 +96,22 @@ const REGISTRATION_FORM = [
     }
 ]
 
+const LOGIN_FORM = [
+    {
+        label: 'User Name',
+        name: 'username',
+        placeholder: 'Enter User Name',
+        required: true,
+    },
+    {
+        label: 'Password',
+        name: 'password',
+        type: 'password',
+        placeholder: 'Enter Password',
+        required: true
+    }
+]
 
 
-export { EVENT_FORM, CALENDER_FORM, CALENDERS, REGISTRATION_FORM }
+
+export { EVENT_FORM, CALENDER_FORM, CALENDERS, REGISTRATION_FORM, LOGIN_FORM }

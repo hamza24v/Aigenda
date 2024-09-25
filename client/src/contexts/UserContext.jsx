@@ -21,7 +21,7 @@ export const UserProvider = ({ children }) => {
       .catch(console.log);
   };
   
-  const loginUser = (user) => {
+  const loginUser = async (user) => {
     update("user/authenticate", user).then((data) => {
       if (data) {
         setUserErrors(data);
