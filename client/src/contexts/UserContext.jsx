@@ -10,11 +10,11 @@ export const UserProvider = ({ children }) => {
   const [user, setUser] = useState(null); 
   const [jwtToken, setJwtToken] = useState(null);
   const [userErrors, setUserErrors] = useState([]);
-  const { post, remove } = apiService;
+  const { postLogin, remove } = apiService;
 
   const registerUser = async (user) => {
     user.roles = [];
-    post("user/register", user)
+    postLogin("user/register", user)
       .then((data) => {
         if (data.appUserId) {
           setUser(data);
@@ -27,7 +27,7 @@ export const UserProvider = ({ children }) => {
   };
 
   const loginUser = async (credentials) => {
-    post("user/authenticate", credentials)
+    postLogin("user/authenticate", credentials)
       .then((data) => {
         if (data.jwt_token) {
           setUser({...user, ...data, credentials});

@@ -19,7 +19,7 @@ export const CalendarsProvider = ({ children }) => {
 
   // CRUD
   const fetchCalendars = async () => {
-     apiService
+     await apiService
       .getAll(`calendars/user`, localStorage.getItem("jwt_token"), user.appUserId)
       .then((data) => {
         setCalendars(data)

@@ -1,5 +1,5 @@
 const BASE_URL = "http://localhost:8080/api";
-import axios from "axios";
+
 
 async function getAll(endpoint, token, id) {
   console.log(token)
@@ -44,6 +44,22 @@ async function post(endpoint, data, token) {
     },
     body: JSON.stringify(data),
   }).then((response) => {
+    if (response.status === 201 || response.status === 400) {
+      return response.json();
+    } else {
+      return Promise.reject("Unexpected status code: " + response.status);
+    }
+  });
+}
+
+async function postLogin(endpoint, data) {
+  return fetch(`${BASE_URL}/${endpoint}`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  }).then((response) => {
     if (response.status === 200 || response.status === 400) {
       return response.json();
     } else {
@@ -85,5 +101,6 @@ export default {
   get,
   post,
   update,
-  remove
+  remove,
+  postLogin
 };
