@@ -10,8 +10,8 @@ import { useNavigate } from "react-router-dom";
 function Home() {
   const { events } = useEvents();
   const { calendars } = useCalendars();
-  const personalCalendars = calendars.filter(({ type }) => type === "personal");
-  const orgCalendars = calendars.filter(({ type }) => type === "organization");
+  const personalCalendars = calendars.filter(({ type }) => type.toLowerCase() === "personal");
+  const orgCalendars = calendars.filter(({ type }) => type.toLowerCase() === "organization");
   const navigate = useNavigate();
   const { user } = useUser();
   useEffect(() => {
@@ -19,7 +19,7 @@ function Home() {
       navigate("/login");
      
     }
-  },[user])
+  },[user, calendars])
   //console.log(user);
   return (
     <div className="flex flex-col sm:flex-row  min-h-screen">

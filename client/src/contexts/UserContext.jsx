@@ -30,7 +30,8 @@ export const UserProvider = ({ children }) => {
     post("user/authenticate", credentials)
       .then((data) => {
         if (data.jwt_token) {
-          setUser(credentials); 
+          setUser({...user, ...data, credentials});
+          localStorage.setItem("jwt_token", data.jwt_token) 
           setJwtToken(data.jwt_token); 
           console.log("User logged in:", data);
         } else {

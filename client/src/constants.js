@@ -54,8 +54,8 @@ const CALENDAR_FORM = [
         name: 'type',
         type: 'select',
         options: [
-            { value: 'personal', label: 'Personal' },
-            { value: 'organization', label: 'Organization'}
+            { value: 'PERSONAL', label: 'Personal' },
+            { value: 'ORGANIZATION', label: 'Organization'}
         ],
         placeholder: 'Select Type',
         required: true

@@ -1,7 +1,16 @@
 const BASE_URL = "http://localhost:8080/api";
+import axios from "axios";
 
-async function getAll(endpoint) {
-  return fetch(`${BASE_URL}/${endpoint}`).then((response) => {
+async function getAll(endpoint, token, id) {
+  console.log(token)
+  return fetch(`${BASE_URL}/${endpoint}/${id}`,{
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${token}` 
+    }
+  }).then((response) => {
+    console.log(response)
     if (response.status === 200) {
       return response.json();
     } else {
@@ -10,8 +19,14 @@ async function getAll(endpoint) {
   });
 }
 
-async function get(endpoint, id){
-  return fetch(`${BASE_URL}/${endpoint}/${id}`).then((response) => {
+async function get(endpoint, id, token){
+  return fetch(`${BASE_URL}/${endpoint}/${id}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${token}` 
+    }
+  }).then((response) => {
     if (response.status === 200) {
       return response.json();
     } else {

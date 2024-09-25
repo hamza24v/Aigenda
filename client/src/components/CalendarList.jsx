@@ -1,8 +1,9 @@
 import React from "react";
 import { AddCalendar } from '../components/AddCalendar';
+import { useCalendars } from "../contexts/CalendarsContext";
 
 export const CalendarList = ({ title, calendars }) => {
-
+  
   return (
     <div className="p-4">
       <div className="flex justify-between">
