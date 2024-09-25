@@ -1,12 +1,13 @@
 package learn.calendar.domain;
 
 import learn.calendar.data.RoleRepository;
-import learn.calendar.models.Role;
+import learn.calendar.domain.RoleService;
 
+import learn.calendar.models.Role;
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 
 import java.util.List;
 
@@ -16,10 +17,10 @@ import static org.mockito.Mockito.*;
 @SpringBootTest
 class RoleServiceTest {
 
-    @InjectMocks
+    @Autowired
     RoleService service;
 
-    @Mock
+    @MockBean
     RoleRepository repository;
 
     @Test
@@ -27,6 +28,8 @@ class RoleServiceTest {
         List<Role> expected = List.of(createRoleAdmin(), createRoleUser());
         when(repository.findAll()).thenReturn(expected);
         List<Role> actual = service.findAll();
+
+        assertEquals(expected.size(), actual.size());
         assertEquals(expected, actual);
     }
 
@@ -64,7 +67,6 @@ class RoleServiceTest {
     void canUpdate() {
         Role role = createRoleAdmin();
         when(repository.update(role)).thenReturn(true);
-
         Result<Role> result = service.update(role);
         assertTrue(result.isSuccess());
         assertEquals(role, result.getPayload());
@@ -94,8 +96,7 @@ class RoleServiceTest {
         boolean result = service.deleteById(999);
         assertFalse(result);
     }
-
-
+    
     private Role createRoleAdmin() {
         Role role = new Role();
         role.setId(1);
