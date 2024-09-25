@@ -77,7 +77,7 @@ const REGISTRATION_FORM = [
     {
         label: 'User Name',
         name: 'username',
-        placeholder: 'Enter User Name',
+        placeholder: 'Enter a New User Name',
         required: true,
     },
     {

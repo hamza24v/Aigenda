@@ -34,7 +34,7 @@ function Login() {
         <Typography className="text-gray-500 text-sm mt-4 w-full text-center">
           Don't have an account?{" "}
           <Link
-            to="/login"
+            to="/register"
             className="text-indigo-600 hover:text-indigo-800 text-center"
           >
             Register here
