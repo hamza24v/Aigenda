@@ -1,0 +1,30 @@
+@url = http://localhost:8080/api/role
+@token = eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJjYWxlbmRhciIsInN1YiI6InRlc3RAam9uZXMuY29tIiwiYXV0aG9yaXRpZXMiOiJST0xFX1VzZXIiLCJleHAiOjE3MjcyMzM5OTl9.BQBXnQNmlue1p_6QLfhKT5vX7qIEW4YoaLp81-WE4bM
+GET {{url}} HTTP/1.1
+Authorization: Bearer {{token}}
+
+###
+
+GET {{url}}/1 HTTP/1.1
+Authorization: Bearer {{token}}
+
+###
+
+POST {{url}}/register HTTP/1.1
+Content-Type: application/json
+
+{
+  "name": "Admin"
+}
+
+
+###
+
+POST {{url}}/register HTTP/1.1
+Content-Type: application/json
+
+{
+  "id": 1,
+  "name": "Other"
+}
+

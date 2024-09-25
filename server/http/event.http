@@ -1,5 +1,5 @@
 @url = http://localhost:8080/api/event
-@token = eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJjYWxlbmRhciIsInN1YiI6InRlc3RAam9uZXMuY29tIiwiYXV0aG9yaXRpZXMiOiJST0xFX1VzZXIiLCJleHAiOjE3MjcyMzEyMTd9.E6Y15myy87-NP3uIahD5u6Lyh_Mc9hVvb9NJI3ch1CQ
+@token = eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJjYWxlbmRhciIsInN1YiI6InRlc3RAam9uZXMuY29tIiwiYXV0aG9yaXRpZXMiOiJST0xFX1VzZXIiLCJleHAiOjE3MjcyMzM5OTl9.BQBXnQNmlue1p_6QLfhKT5vX7qIEW4YoaLp81-WE4bM
 GET {{url}} HTTP/1.1
 Authorization: Bearer {{token}}
 
