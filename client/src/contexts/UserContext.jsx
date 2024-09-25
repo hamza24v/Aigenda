@@ -12,10 +12,13 @@ export const UserProvider = ({ children }) => {
   const { post, remove } = apiService;
 
   const registerUser = async (user) => {
+    user.roles = [];
     post("user/register", user)
       .then(data => {
+        console.log(data);
         if (data.appUserId) {
           setUser(data);
+          console.log(data);
         } else {
           setUserErrors(data);
         }
@@ -28,6 +31,8 @@ export const UserProvider = ({ children }) => {
       .then((data) => {
         if (data.jwt_token) {
             setUser({user, ...data});
+            console.log("data:");
+            console.log(data);
           } else {
             setUserErrors(data);
           }

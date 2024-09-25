@@ -26,7 +26,7 @@ async function post(endpoint, data) {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(data),
   }).then((response) => {
-    if (response.status === 201 || response.status === 400) {
+    if (response.status === 200 || response.status === 400) {
       return response.json();
     } else {
       return Promise.reject("Unexpected status code: " + response.status);
@@ -50,8 +50,8 @@ async function update(endpoint, id, data) {
   });
 }
 
-async function remove(endpoint, id) {
-  return fetch(`${BASE_URL}/${endpoint}/${id}`, {
+async function remove(endpoint) {
+  return fetch(`${BASE_URL}/${endpoint}`, {
     method: "DELETE",
   }).then((response) => {
     if (response.status === 204) {

@@ -1,22 +1,23 @@
 import React, { createContext, useState, useEffect, useContext } from "react";
 import apiService from "../apiService";
+import { useUser } from "./UserContext";
 
 export const CalendarsContext = createContext();
 
 export const CalendarsProvider = ({ children }) => {
   const [calendars, setCalendars] = useState([]);
   const [calendarErrors, setCalendarErrors] = useState([]);
-
+  const {user} = useUser();
   // retreve user jwt info
 
   useEffect(() => {
     fetchCalendars();
-  }, []);
+  }, [user]);
 
   // CRUD
   const fetchCalendars = async () => {
     await apiService
-      .getAll("calendar")
+      .getAll("calendars")
       .then((data) => setCalendars(data))
       .catch(console.log);
   };
@@ -24,7 +25,7 @@ export const CalendarsProvider = ({ children }) => {
   const createCalendar = async (calendar) => {
     setCalendars([...calendars, calendar]);
     apiService
-      .post("calendar/create", calendar)
+      .post("calendars/create", calendar)
       .then((data) => {
         if (!data.calendarId) {
           setCalendarErrors(data);
@@ -41,7 +42,7 @@ export const CalendarsProvider = ({ children }) => {
 
   const updateCalendar = (calendar) => {
     calendar.calendarId = calendars.findIndex(calendar);
-    apiService.update("calendar/update").then((data) => {
+    apiService.update("calendars/",  calendar.calendarId).then((data) => {
       if (data) {
         setCalendarErrors(data);
       }
@@ -51,7 +52,7 @@ export const CalendarsProvider = ({ children }) => {
 
   const deleteCalendar = async (userId,calendarId) => {
     apiService
-      .remove("calendar/delete", userId,calendarId)
+      .remove( `calendars/delete/${userId}/${calendarId}`)
       .then(() => {
         setCalendars((prevcalendars) =>
           prevcalendars.filter((e) => e.calendarId !== calendarId)

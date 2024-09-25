@@ -5,10 +5,12 @@ import Typography from "@mui/material/Typography";
 import { useUser } from "../contexts/UserContext";
 import { Link } from "react-router-dom";
 function Register() {
-  const { registerUser } = useUser(); // fetching register route from UserContext
+  const { registerUser,user} = useUser(); // fetching register route from UserContext
 
   const handleSubmit = async (formData) => {
     await registerUser(formData);
+    console.log("String registered");
+    console.log(user);
   };
   return (
     <div className="flex justify-center min-h-screen  bg-gray-100">

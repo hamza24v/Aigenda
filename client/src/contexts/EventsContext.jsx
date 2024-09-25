@@ -50,7 +50,7 @@ export const EventsProvider = ({ children }) => {
 
   const deleteEvent = async (id) => {
     apiService
-      .remove("events", eventId)
+    .remove( `events/${eventId}`)
       .then(() => {
         setEvents((prevEvents) => prevEvents.filter((e) => e.eventId !== id));
       })

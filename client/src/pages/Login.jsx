@@ -3,15 +3,18 @@ import { Form } from "../components/Form";
 import { LOGIN_FORM } from "../constants";
 import Typography from "@mui/material/Typography";
 import { useUser } from "../contexts/UserContext";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function Login() {
 
-  const { loginUser } = useUser(); // fetching login route from UserContext
-
+  const { loginUser, user } = useUser(); // fetching login route from UserContext
+  const navigate = useNavigate();
 
   const handleSubmit = async (formData) => {
     await loginUser(formData);
+    if(user){
+     navigate("/home");
+    }
   };
 
   return (
