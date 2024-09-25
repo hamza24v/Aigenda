@@ -35,8 +35,8 @@ public class AuthController {
     }
 
     @PostMapping("/authenticate")
-    public ResponseEntity<Map<String, String>> authenticate(@RequestBody Map<String, String> credentials) {
-
+    public ResponseEntity<Map<String, Object>> authenticate(@RequestBody Map<String, String> credentials) {
+        int id = appUserService.getUserIdByUsername(credentials.get("username"));
         UsernamePasswordAuthenticationToken authToken =
                 new UsernamePasswordAuthenticationToken(credentials.get("username"), credentials.get("password"));
 
@@ -46,8 +46,11 @@ public class AuthController {
             if (authentication.isAuthenticated()) {
                 String jwtToken = converter.getTokenFromUser((User) authentication.getPrincipal());
 
-                HashMap<String, String> map = new HashMap<>();
+                HashMap<String, Object> map = new HashMap<>();
                 map.put("jwt_token", jwtToken);
+                map.put("appUserId", id);
+
+
 
                 return new ResponseEntity<>(map, HttpStatus.OK);
             }

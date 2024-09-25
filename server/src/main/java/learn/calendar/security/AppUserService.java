@@ -48,6 +48,10 @@ public class AppUserService implements UserDetailsService {
         return appUser;
     }
 
+    public int getUserIdByUsername(String username) {
+        return userRepository.findIdByUsername(username);
+    }
+
     public Result<AppUser> create(String username, String password, AppUser user) {
         validate(username);
         validatePassword(password);
