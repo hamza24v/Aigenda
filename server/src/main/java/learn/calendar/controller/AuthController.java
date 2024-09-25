@@ -1,5 +1,6 @@
 package learn.calendar.controller;
 
+import learn.calendar.domain.Result;
 import learn.calendar.models.AppUser;
 import learn.calendar.security.AppUserService;
 import learn.calendar.security.JwtConverter;
@@ -67,8 +68,12 @@ public class AuthController {
         try {
             String username = credentials.getUsername();
             String password = credentials.getPassword();
-
-            appUser = appUserService.create(username, password, credentials);
+            Result<AppUser> result = appUserService.create(username, password, credentials);
+            if (result.isSuccess()) {
+                appUser = result.getPayload();
+            } else {
+                return ErrorResponse.build(result);
+            }
         } catch (ValidationException ex) {
             return new ResponseEntity<>(List.of(ex.getMessage()), HttpStatus.BAD_REQUEST);
         } catch (DuplicateKeyException ex) {
