@@ -2,7 +2,10 @@ package learn.calendar.security;
 
 
 import learn.calendar.data.AppUserRepository;
+import learn.calendar.data.CalendarRepository;
 import learn.calendar.models.AppUser;
+import learn.calendar.models.CalType;
+import learn.calendar.models.Calendar;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -14,17 +17,19 @@ import java.util.List;
 
 @Service
 public class AppUserService implements UserDetailsService {
-    private final AppUserRepository repository;
+    private final AppUserRepository userRepository;
+    private final CalendarRepository calendarRepository;
     private final PasswordEncoder encoder;
 
-    public AppUserService(AppUserRepository repository, PasswordEncoder encoder) {
-        this.repository = repository;
+    public AppUserService(AppUserRepository userRepository, CalendarRepository calendarRepository, PasswordEncoder encoder) {
+        this.userRepository = userRepository;
+        this.calendarRepository = calendarRepository;
         this.encoder = encoder;
     }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        AppUser appUser = repository.findByUsername(username);
+        AppUser appUser = userRepository.findByUsername(username);
 
         if (appUser == null || !appUser.isEnabled()) {
             throw new UsernameNotFoundException(username + "not found");
@@ -40,7 +45,10 @@ public class AppUserService implements UserDetailsService {
         password = encoder.encode(password);
 
         user = new AppUser(0, user.getFirstName(), user.getLastName(), user.getEmail(), username, password, false, List.of("USER"));
-        return repository.add(user);
+        AppUser result = userRepository.add(user);
+        Calendar calendar = new Calendar(0,result.getFirstName() + " " + result.getLastName(), CalType.PERSONAL, result.getAppUserId());
+        calendarRepository.add(calendar);
+        return result;
     }
 
     private void validate(String username) {

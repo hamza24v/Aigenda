@@ -105,8 +105,8 @@ begin
 
 	insert into app_user (app_user_id, first_name, last_name, email, username, disabled, `password`)
 	values 
-	(1, 'John', 'Doe', 'john.doe@gmail.com', 'testuser', false, 'password123'),
-	(2, 'Jane', 'Smith', 'jane.smith@gmail.com', 'usertest', false, 'password456');
+	(1, 'John', 'Doe', 'john.doe@gmail.com', 'testuser', false, '$2a$10$ntB7CsRKQzuLoKY3rfoAQen5nNyiC/U60wBsWnnYrtQQi8Z3IZzQa'),
+	(2, 'Jane', 'Smith', 'jane.smith@gmail.com', 'usertest', false, '$2a$10$ntB7CsRKQzuLoKY3rfoAQen5nNyiC/U60wBsWnnYrtQQi8Z3IZzQa');
 
 	insert into calendar (calendar_id, title, `type`, app_user_id)
 	values 
