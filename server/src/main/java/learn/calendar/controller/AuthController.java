@@ -20,7 +20,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@CrossOrigin(origins = {"http://localhost:5173"})
+@CrossOrigin()
 @RequestMapping("/api/user")
 public class AuthController {
 
@@ -87,7 +87,11 @@ public class AuthController {
     }
 
     @PostMapping("/delete/{userId}")
-    public ResponseEntity<?> deleteAccount() {
-        if (appUserService)
+    public ResponseEntity<?> deleteAccount(@PathVariable int userId) {
+        if (appUserService.deleteById(userId)) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+
     }
 }

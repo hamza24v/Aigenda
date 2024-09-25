@@ -4,7 +4,7 @@
 
 GET {{url}}/user/4
 Authorization: Bearer {{token}}
-
+ 
 
 ###
 

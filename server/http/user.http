@@ -1,12 +1,12 @@
 @url = http://localhost:8080/api/user
-
+@token = eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJjYWxlbmRhciIsInN1YiI6InRlc3RAam9uZXMuY29tIiwiYXV0aG9yaXRpZXMiOiJST0xFX1VzZXIiLCJleHAiOjE3MjcyODA3NDV9.ny26a797g0ceNN2FDYAuk6Pu6aZ0-rfi3cMNdsU6K10
 
 
 POST {{url}}/authenticate HTTP/1.1
 Content-Type: application/json
 
 {
-    "username": "test@jones.com",
+    "username": "ADMIN",
     "password": "P@ssw0rd!"
 }
 
@@ -37,3 +37,7 @@ Content-Type: application/json
     "password": "P@ssw0rd!",
     "roles": []
 }
+
+###
+DELETE {{url}}/delete/2 HTTP/1.1
+Authorization: Bearer {{token}}
