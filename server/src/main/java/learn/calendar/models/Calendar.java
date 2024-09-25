@@ -8,14 +8,13 @@ public class Calendar {
     private CalType type;
     private int userId;
 
-    public Calendar(String title, int id, CalType type, int userId) {
-        this.title = title;
+    public Calendar(int id, String title, CalType type, int userId) {
         this.id = id;
+        this.title = title;
         this.type = type;
         this.userId = userId;
     }
     public Calendar(){
-
     }
 
     public String getTitle() {

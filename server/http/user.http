@@ -6,7 +6,7 @@ POST {{url}}/authenticate HTTP/1.1
 Content-Type: application/json
 
 {
-    "username": "joee@jones.com",
+    "username": "test@jones.com",
     "password": "P@ssw0rd!"
 }
 
@@ -16,10 +16,10 @@ POST {{url}}/register HTTP/1.1
 Content-Type: application/json
 
 {
-    "firstName": "Marcus",
+    "firstName": "Mary",
     "lastName": "Lim",
     "email": "test@test.com",
-    "username": "joee@jones.com",
+    "username": "test@jones.com",
     "password": "P@ssw0rd!",
     "roles": []
 }
