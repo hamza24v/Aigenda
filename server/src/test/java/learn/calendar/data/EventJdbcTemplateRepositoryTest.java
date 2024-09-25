@@ -91,7 +91,6 @@ class EventJdbcTemplateRepositoryTest {
         );
         boolean result = repository.update(event);
         assertTrue(result);
-
     }
 
     @Test
@@ -100,5 +99,11 @@ class EventJdbcTemplateRepositoryTest {
         boolean result = repository.deleteById(1);
         assertTrue(result);
 
+    }
+
+    @Test
+    void canFindAllByUser() {
+        List<Event> events = repository.findAllByUser(1);
+        assertNotNull(events);
     }
 }

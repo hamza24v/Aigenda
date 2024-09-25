@@ -29,6 +29,15 @@ public class EventJdbcTemplateRepository implements EventRepository {
     }
 
     @Override
+    public List<Event> findAllByUser(int appUserId) {
+        final String sql = "select event_id, title, description, calendar_id, app_user_id, type, "
+                + "start_time, end_time, status "
+                + "from event "
+                + "where app_user_id = ?;";
+        return jdbcTemplate.query(sql, new EventMapper(), appUserId);
+    }
+
+    @Override
     public Event findById(int eventId) {
         final String sql = "select event_id, title, description, calendar_id, app_user_id, type, "
                 + "start_time, end_time, status " + "from event " + "where event_id = ?;";

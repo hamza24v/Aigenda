@@ -44,10 +44,10 @@ class CalendarJdbcTemplateRepositoryTest {
         Calendar calendar = new Calendar();
         calendar.setTitle("Raids");
         calendar.setType(CalType.BROADCAST);
-        calendar.setUser(1);
+        calendar.setCalendarId(1);
 
         Calendar actual = repository.add(calendar);
-        assertEquals(actual.getId(), 3);
+        assertEquals(actual.getCalendarId(), 3);
 
         assertEquals("Raids", actual.getTitle());
     }
@@ -55,10 +55,10 @@ class CalendarJdbcTemplateRepositoryTest {
     @Test
     void shouldUpdate() {
         Calendar calendar = new Calendar();
-        calendar.setId(1);
+        calendar.setUserId(1);
         calendar.setType(CalType.BROADCAST);
         calendar.setTitle("Dungeons");
-        calendar.setUser(2);
+        calendar.setUserId(2);
 
         boolean actual = repository.update(calendar);
         assertTrue(actual);

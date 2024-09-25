@@ -7,6 +7,8 @@ import java.util.List;
 
 public interface EventRepository {
     List<Event> findAll();
+
+    List<Event> findAllByUser(int appUserId);
     @Transactional
     Event findById(int eventId);
 

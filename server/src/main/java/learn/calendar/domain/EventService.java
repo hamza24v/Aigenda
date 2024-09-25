@@ -28,9 +28,14 @@ public class EventService {
         return eventRepository.findAll();
     }
 
+    public List<Event> findEventsForUser(int appUserId){
+        return eventRepository.findAllByUser(appUserId);
+    }
+
     public Event findById(int eventId){
         return eventRepository.findById(eventId);
     }
+
 
     public Result<Event> add(Event event){
         Result<Event> result = validate(event);
