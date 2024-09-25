@@ -1,4 +1,4 @@
-@url = http://localhost:8080/api/event
+@url = http://localhost:8080/api/events
 @token = eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJjYWxlbmRhciIsInN1YiI6InRlc3RAam9uZXMuY29tIiwiYXV0aG9yaXRpZXMiOiJST0xFX1VzZXIiLCJleHAiOjE3MjcyMzYzMzF9.sM66n-1mFNqs56zUrrX-wHO7ZaMghwWNl-djex1oHVU
 GET {{url}} HTTP/1.1
 Authorization: Bearer {{token}}
@@ -59,7 +59,7 @@ Content-Type: application/json
 
 ###
 
-PUT {{url}} HTTP/1.1
+PUT {{url}}/4 HTTP/1.1
 Authorization: Bearer {{token}}
 Content-Type: application/json
 

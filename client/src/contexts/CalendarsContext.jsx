@@ -16,31 +16,32 @@ export const CalendarsProvider = ({ children }) => {
   // CRUD
   const fetchCalendars = async () => {
     await apiService
-      .getAll("calendars")
+      .getAll("calendar")
       .then((data) => setCalendars(data))
       .catch(console.log);
   };
 
   const createCalendar = async (calendar) => {
     setCalendars([...calendars, calendar]);
-    // apiService
-    //   .post("calendars", calendar)
-    //   .then((data) => {
-    //     if (!data.calendarsId) {
-    //       setCalendarErrors(data);
-    //     }
-    //   })
-    //   .catch(console.log);
+    apiService
+      .post("calendar/create", calendar)
+      .then((data) => {
+        if (!data.calendarId) {
+          setCalendarErrors(data);
+          console.log(data);
+        }
+      })
+      .catch(console.log);
 
-    // // temporary add calendar
-    // fetchCalendars();
+    // temporary add calendar
+    fetchCalendars();
 
     console.log("calender added: ", calendar);
   };
 
-  const updateCalendar = (calendar, id) => {
-    calendar.calendarId = id;
-    apiService.update("calendars", id, calendar).then((data) => {
+  const updateCalendar = (calendar) => {
+    calendar.calendarId = calendars.findIndex(calendar);
+    apiService.update("calendar/update").then((data) => {
       if (data) {
         setCalendarErrors(data);
       }
@@ -48,12 +49,12 @@ export const CalendarsProvider = ({ children }) => {
     .catch(console.log);
   };
 
-  const deleteCalendar = async (id) => {
+  const deleteCalendar = async (userId,calendarId) => {
     apiService
-      .remove("calendars", id)
+      .remove("calendar/delete", userId,calendarId)
       .then(() => {
         setCalendars((prevcalendars) =>
-          prevcalendars.filter((e) => e.calendarsId !== id)
+          prevcalendars.filter((e) => e.calendarId !== calendarId)
         );
       })
       .then((data) => {

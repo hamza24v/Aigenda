@@ -13,7 +13,7 @@ import java.util.List;
 
 @RestController
 @CrossOrigin()
-@RequestMapping("/api/calendar")
+@RequestMapping("/api/calendars")
 public class CalendarController {
 
     private final CalendarService calendarService;
@@ -40,8 +40,8 @@ public class CalendarController {
 
     }
 
-    @PutMapping("/update")
-    public ResponseEntity<?> updateCalendar(@RequestBody Calendar calendar) {
+    @PutMapping("/{calendarId}")
+    public ResponseEntity<?> updateCalendar(@RequestBody Calendar calendar, @PathVariable int calendarId) {
         Result<Calendar> result = calendarService.update(calendar);
         if (result.isSuccess()) {
             return new ResponseEntity<>(result.getPayload(), HttpStatus.OK);

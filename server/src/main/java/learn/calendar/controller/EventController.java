@@ -11,7 +11,7 @@ import java.util.List;
 
 @RestController
 @CrossOrigin(origins = {"http://localhost:3000"})
-@RequestMapping("/api/event")
+@RequestMapping("/api/events")
 public class EventController {
 
     private final EventService service;
@@ -43,8 +43,8 @@ public class EventController {
         return ErrorResponse.build(result);
     }
 
-    @PutMapping
-    public ResponseEntity<Object> update(@RequestBody Event event) {
+    @PutMapping("/{eventId}")
+    public ResponseEntity<Object> update(@RequestBody Event event,@PathVariable int eventId ) {
         Result<Event> result = service.update(event);
         if (result.isSuccess()) {
             return new ResponseEntity<>(result.getPayload(), HttpStatus.OK);
