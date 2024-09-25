@@ -17,7 +17,6 @@ export const Form = ({ fields, onSubmit, submitText }) => {
         onSubmit(form);
       }
 
-      console.log(fields)
 
 
   return (

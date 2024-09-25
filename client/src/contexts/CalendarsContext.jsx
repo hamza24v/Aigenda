@@ -20,6 +20,7 @@ export const CalendarsProvider = ({ children }) => {
       .getAll("calendars")
       .then((data) => setCalendars(data))
       .catch(console.log);
+      console.log(calendars);
   };
 
   const createCalendar = async (calendar) => {

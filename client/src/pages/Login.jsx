@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Form } from "../components/Form";
 import { LOGIN_FORM } from "../constants";
 import Typography from "@mui/material/Typography";
@@ -12,11 +12,15 @@ function Login() {
 
   const handleSubmit = async (formData) => {
     await loginUser(formData);
-    if(user){
-     navigate("/home");
-    }
+  
   };
-
+  useEffect(() => {
+    if (user) {
+      navigate("/home");
+     
+    }
+  },[user])
+ 
   return (
     <div className="flex justify-center min-h-screen  bg-gray-100">
       <div className="flex flex-col justify-center my-auto w-full max-w-md p-6 bg-white rounded-lg shadow-xl space-y-4">
