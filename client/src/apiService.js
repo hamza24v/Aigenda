@@ -20,10 +20,13 @@ async function get(endpoint, id){
   });
 }
 
-async function post(endpoint, data) {
+async function post(endpoint, data, token) {
   return fetch(`${BASE_URL}/${endpoint}`, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${token}` 
+    },
     body: JSON.stringify(data),
   }).then((response) => {
     if (response.status === 200 || response.status === 400) {

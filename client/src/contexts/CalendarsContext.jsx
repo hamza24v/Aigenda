@@ -24,9 +24,8 @@ export const CalendarsProvider = ({ children }) => {
   };
 
   const createCalendar = async (calendar) => {
-    setCalendars([...calendars, calendar]);
     apiService
-      .post("calendars/create", calendar)
+      .post("calendars/create", calendar, user.jwtToken) 
       .then((data) => {
         if (!data.calendarId) {
           setCalendarErrors(data);
@@ -34,11 +33,9 @@ export const CalendarsProvider = ({ children }) => {
         }
       })
       .catch(console.log);
-
-    // temporary add calendar
+  
     fetchCalendars();
-
-    console.log("calender added: ", calendar);
+    console.log("Calendar added: ", calendar);
   };
 
   const updateCalendar = (calendar) => {
