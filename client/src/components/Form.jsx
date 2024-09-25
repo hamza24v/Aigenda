@@ -17,6 +17,8 @@ export const Form = ({ fields, onSubmit, submitText }) => {
         onSubmit(form);
       }
 
+      console.log(fields)
+
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">

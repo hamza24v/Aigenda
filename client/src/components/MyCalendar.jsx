@@ -33,7 +33,7 @@ const events = [
   },
 ];
 
-export const MyCalendar = () => {
+export const MyCalendar = ({ events }) => {
 
   return (
     <div className="w-full h-full">

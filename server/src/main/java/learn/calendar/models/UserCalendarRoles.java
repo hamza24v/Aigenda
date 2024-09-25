@@ -5,7 +5,7 @@ import java.util.Objects;
 public class UserCalendarRoles {
     private int id;
     private int userId;
-    private int calendarId;
+    private int calendarId; //TODO: 
     private int roleId;
 
     public UserCalendarRoles() {

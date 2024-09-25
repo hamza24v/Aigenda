@@ -1,47 +1,26 @@
-import React, { useState } from "react";
+import React from "react";
 import { MyCalendar } from "../components/MyCalendar";
 import { CalendarList } from "../components/CalendarList";
-import { Button } from "@mui/material";
-import { PopupModal } from "../components/PopupModal";
-import { Form } from "../components/Form";
-import { EVENT_FORM } from "../constants";
+import { AddEvent } from '../components/AddEvent';
+import { useEvents } from "../contexts/EventsContext";
+import { useCalendars } from '../contexts/CalendarsContext';
 
 function Home() {
-  const [showModal, setShowModal] = useState(false);
-  const [eventForm, setEventForm] = useState({});
-
-  const handleSubmit = (formData) => {
-    setEventForm(formData);
-    setShowModal(false);
-  };
-
-  console.log("event form");
-  console.log(eventForm);
+  const { events } = useEvents();
+  const { calendars } = useCalendars();
+  const personalCalendars = calendars.filter(({ type }) => type === "personal");
+  const orgCalendars = calendars.filter(({ type }) => type === "organization");
 
   return (
     <div className="flex flex-col sm:flex-row  min-h-screen">
       <div className="sm:w-1/4">
-        <CalendarList title="My Calendars" />
-        <CalendarList title="Joined Calendars" />
+        <CalendarList title="My Calendars" calendars={personalCalendars} />
+        <CalendarList title="Joined Calendars" calendars={orgCalendars} />
       </div>
       <div className="sm:w-3/4">
-        <MyCalendar />
+        <MyCalendar events={events}/>
       </div>
-      <div className="fixed right-10 bottom-10 z-50 ">
-        <Button variant="contained" onClick={() => setShowModal(true)}>
-          Add Event
-        </Button>
-
-        {showModal && (
-          <PopupModal
-            title="Add an Event"
-            open={showModal}
-            onClose={() => setShowModal(false)}
-          >
-            <Form fields={EVENT_FORM} onSubmit={handleSubmit} />
-          </PopupModal>
-        )}
-      </div>
+      <AddEvent />
     </div>
   );
 }

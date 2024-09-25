@@ -15,7 +15,9 @@ export const PopupModal = ({ title, children, onClose, open }) => {
     bgcolor: "background.paper",
     border: "2px solid #000",
     boxShadow: 24,
-    p: 4,
+    px: 4,
+    pb: 4,
+    pt: 2
   };
 
   return (
@@ -26,7 +28,7 @@ export const PopupModal = ({ title, children, onClose, open }) => {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <Box display="flex" justifyContent="flex-end">
+          <Box className="fixed right-1">
             <IconButton onClick={onClose}>
               <CloseIcon />
             </IconButton>

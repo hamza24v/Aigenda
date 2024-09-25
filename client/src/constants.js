@@ -31,10 +31,18 @@ const EVENT_FORM = [
         type: 'email',
         placeholder: 'Enter Guests Emails',
         required: false
+    },
+    {
+        label: 'Calendars',
+        name: 'calendars',
+        type: 'select',
+        options: [],
+        placeholder: 'Select Calendars',
+        required: true
     }
 ]
 
-const CALENDER_FORM = [
+const CALENDAR_FORM = [
     {
         label: 'Title',
         name: 'title',
@@ -54,7 +62,7 @@ const CALENDER_FORM = [
     }
 ]
 
-const CALENDERS = [
+const CALENDARS = [
     {
       title: "John Smith",
       type: "personal"
@@ -114,4 +122,4 @@ const LOGIN_FORM = [
 
 
 
-export { EVENT_FORM, CALENDER_FORM, CALENDERS, REGISTRATION_FORM, LOGIN_FORM }
+export { EVENT_FORM, CALENDAR_FORM, CALENDARS, REGISTRATION_FORM, LOGIN_FORM }

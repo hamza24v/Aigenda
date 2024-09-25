@@ -10,7 +10,7 @@ export const EventsProvider = ({ children }) => {
 
   useEffect(() => {
     fetchEvents();
-  }, [user]);
+  }, []);
 
   // CRUD
   const fetchEvents = async () => {
@@ -21,15 +21,18 @@ export const EventsProvider = ({ children }) => {
   };
 
   const createEvent = async (event) => {
-    apiService
-      .post("events", event)
-      .then((data) => {
-        if (!data.eventId) {
-          setEventErrors(data);
-        }
-      })
-      .catch(console.log);
-    fetchEvents();
+    // apiService
+    //   .post("events", event)
+    //   .then((data) => {
+    //     if (!data.eventId) {
+    //       setEventErrors(data);
+    //     }
+    //   })
+    //   .catch(console.log);
+
+    // temporary add event
+    setEvents([...events, event]);
+    //fetchEvents();
   };
 
   const updateEvent = (event, id) => {
@@ -42,6 +45,7 @@ export const EventsProvider = ({ children }) => {
         }
       })
       .catch(console.log);
+      fetchEvents();
   };
 
   const deleteEvent = async (id) => {
