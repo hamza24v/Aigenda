@@ -1,0 +1,78 @@
+@url = http://localhost:8080/api/event
+@token = eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJjYWxlbmRhciIsInN1YiI6InRlc3RAam9uZXMuY29tIiwiYXV0aG9yaXRpZXMiOiJST0xFX1VzZXIiLCJleHAiOjE3MjcyMzEyMTd9.E6Y15myy87-NP3uIahD5u6Lyh_Mc9hVvb9NJI3ch1CQ
+GET {{url}} HTTP/1.1
+Authorization: Bearer {{token}}
+
+###
+
+GET {{url}}/1 HTTP/1.1
+Authorization: Bearer {{token}}
+
+###
+
+DELETE {{url}}/4 HTTP/1.1
+Authorization: Bearer {{token}}
+
+###
+
+DELETE {{url}}/999 HTTP/1.1
+Authorization: Bearer {{token}}
+
+
+###
+
+POST {{url}} HTTP/1.1
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{   
+    "title": "Work meeting",
+    "description": "discussing things at the meeting",
+    "calendarId": 2,
+    "appUserId": 1,
+    "eventType": "PERSONAL",
+    "startDate": "2024-11-20T12:00:00",
+    "endDate": "2024-11-20T13:30:00",
+     "status": "Pending"
+}
+
+
+###
+
+#id is set already, invalid
+POST {{url}} HTTP/1.1
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{   
+    "eventId" : 10,
+    "title": "Work meeting",
+    "description": "discussing things at the meeting",
+    "calendarId": 2,
+    "appUserId": 1,
+    "eventType": "PERSONAL",
+    "startDate": "2024-11-20T12:00:00",
+    "endDate": "2024-11-20T13:30:00",
+     "status": "Pending"
+}
+
+
+###
+
+PUT {{url}} HTTP/1.1
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{   
+    "eventId" : 4,
+    "title": "Wodrk meeting",
+    "description": "discussing things at the meeting",
+    "calendarId": 2,
+    "appUserId": 1,
+    "eventType": "PERSONAL",
+    "startDate": "2024-11-20T12:00:00",
+    "endDate": "2024-11-20T13:30:00",
+     "status": "Pending"
+}
+
+
