@@ -32,7 +32,7 @@ export const CalendarsProvider = ({ children }) => {
     console.log(calendar)
     calendar.userId = user.appUserId
     apiService
-      .post("calendars/create", calendar, user.jwtToken) 
+      .post("calendars/create", calendar, user.jwt_token) 
       .then((data) => {
         if (!data.calendarId) {
           setCalendarErrors(data);

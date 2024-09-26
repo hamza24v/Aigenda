@@ -11,8 +11,8 @@ import { ChatBot } from "../components/ChatBot";
 function Home() {
   const { events } = useEvents();
   const { calendars } = useCalendars();
-  const personalCalendars = calendars.filter(({ type }) => type === "personal");
-  const orgCalendars = calendars.filter(({ type }) => type === "organization");
+  const personalCalendars = calendars.filter(({ type }) => type.toLowerCase() === "personal");
+  const orgCalendars = calendars.filter(({ type }) => type.toLowerCase() === "organization");
   const navigate = useNavigate();
   const { user } = useUser();
   console.log("events");

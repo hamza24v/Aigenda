@@ -4,11 +4,11 @@ export const Form = ({ fields, onSubmit, submitText, defaultValues={} }) => {
     
     const [form, setForm] = useState(defaultValues);
 
-    useEffect(() => {
-      setForm(defaultValues);
-      console.log("default values: ");
-      console.log(defaultValues);
-    }, [defaultValues]);
+    // useEffect(() => {
+    //   setForm(defaultValues);
+    //   console.log("default values: ");
+    //   console.log(defaultValues);
+    // }, [defaultValues]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
