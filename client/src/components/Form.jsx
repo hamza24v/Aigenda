@@ -1,8 +1,14 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
-export const Form = ({ fields, onSubmit, submitText }) => {
+export const Form = ({ fields, onSubmit, submitText, defaultValues={} }) => {
     
-    const [form, setForm] = useState([]);
+    const [form, setForm] = useState(defaultValues);
+
+    useEffect(() => {
+      setForm(defaultValues);
+      console.log("default values: ");
+      console.log(defaultValues);
+    }, [defaultValues]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
