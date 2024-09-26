@@ -6,11 +6,13 @@ import { Form } from "./Form";
 import { PopupModal } from "./PopupModal";
 import { CALENDAR_FORM, EVENT_FORM } from "../constants";
 import { Button } from "@mui/material";
+import { useEvents } from "../contexts/EventsContext";
 
 export const ChatBot = () => {
   const [message, setMessage] = useState("");
   const [botResponse, setBotResponse] = useState(null);
   const [showModal, setShowModal] = useState(false);
+  const { createEvent } = useEvents();
   let formType;
   if (botResponse) {
     if (botResponse?.calendar) {
@@ -21,13 +23,23 @@ export const ChatBot = () => {
   }
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await sendMessage(message);
-    const { event, calendar } = response;
-    setBotResponse(event ? event : calendar);
-    setShowModal(true);
+    if(message.trim()){
+      const response = await sendMessage(message);
+      const { event, calendar } = response;
+      setBotResponse(event ? event : calendar);
+      setShowModal(true);
+    } else {
+      alert("Please enter a valid message");
+    }
+   
   };
 
-  const handleFormSubmit = (formData) => {};
+  const handleFormSubmit = async (formData) => {
+    await createEvent(formData);
+    setShowModal(false);
+    console.log("event added");
+    console.log(formData);
+  };
 
   return (
     <Box

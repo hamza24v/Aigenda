@@ -27,8 +27,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests() // 2
                 .antMatchers("/api/user/authenticate").permitAll()
                 .antMatchers("/api/user/register").permitAll()
-                .antMatchers("/api/user/delete").hasRole("ADMIN")
-                .antMatchers("/api/user/").hasRole("ADMIN")
+                .antMatchers("/api/calendars/create").permitAll()
+                .antMatchers("/api/calendars/user/*").permitAll()
+                .antMatchers("/api/calendars/delete/*/*").permitAll()
+                .antMatchers("/api/calendars/update/*").permitAll()
+                .antMatchers(HttpMethod.DELETE,"/api/user/delete/*").hasRole("ADMIN")
                 .anyRequest().authenticated()
                 .and()
                 .addFilter(new JwtRequestFilter(authenticationManager(), converter)) // 3

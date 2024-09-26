@@ -165,7 +165,7 @@ class EventServiceTest {
 
     private Calendar makeCalendar() {
         Calendar calendar = new Calendar();
-        calendar.setId(1);
+        calendar.setCalendarId(1);
         calendar.setTitle("Your personal calendar");
         calendar.setType(CalType.PERSONAL);
         return calendar;

@@ -20,9 +20,9 @@ public class EventController {
         this.service = service;
     }
 
-    @GetMapping
-    public List<Event> findAll() {
-        return service.findAll();
+    @GetMapping("/user/{appUserId}")
+    public List<Event> findEventsByUser(@PathVariable int appUserId) {
+        return service.findEventsForUser(appUserId);
     }
 
     @GetMapping("/{eventId}")

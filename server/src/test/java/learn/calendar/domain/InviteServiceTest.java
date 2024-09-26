@@ -57,7 +57,7 @@ class InviteServiceTest {
         Event event = makeEvent();
         when(eventRepository.findById(event.getEventId())).thenReturn(event);
         Calendar calendar = makeCalendar();
-        when(calendarRepository.findById(calendar.getId())).thenReturn(calendar);
+        when(calendarRepository.findById(calendar.getCalendarId())).thenReturn(calendar);
         AppUser appUser = makeAppUser();
         when(appUserRepository.findById(appUser.getAppUserId())).thenReturn(appUser);
         Invite newInvite = makeInvite();
@@ -88,7 +88,7 @@ class InviteServiceTest {
         Event event = makeEvent();
         when(eventRepository.findById(event.getEventId())).thenReturn(event);
         Calendar calendar = makeCalendar();
-        when(calendarRepository.findById(calendar.getId())).thenReturn(calendar);
+        when(calendarRepository.findById(calendar.getCalendarId())).thenReturn(calendar);
         AppUser appUser = makeAppUser();
         when(appUserRepository.findById(appUser.getAppUserId())).thenReturn(appUser);
         Invite newInvite = makeInvite();
@@ -107,7 +107,7 @@ class InviteServiceTest {
         Event event = makeEvent();
         when(eventRepository.findById(event.getEventId())).thenReturn(event);
         Calendar calendar = makeCalendar();
-        when(calendarRepository.findById(calendar.getId())).thenReturn(calendar);
+        when(calendarRepository.findById(calendar.getCalendarId())).thenReturn(calendar);
         AppUser appUser = makeAppUser();
         when(appUserRepository.findById(appUser.getAppUserId())).thenReturn(appUser);
         Invite newInvite = makeInvite();
@@ -134,7 +134,7 @@ class InviteServiceTest {
 
     private Calendar makeCalendar() {
         Calendar calendar = new Calendar();
-        calendar.setId(1);
+        calendar.setCalendarId(1);
         calendar.setTitle("Your personal calendar");
         calendar.setType(CalType.PERSONAL);
         return calendar;

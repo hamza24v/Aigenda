@@ -1,7 +1,16 @@
 const BASE_URL = "http://localhost:8080/api";
 
-async function getAll(endpoint) {
-  return fetch(`${BASE_URL}/${endpoint}`).then((response) => {
+
+async function getAll(endpoint, token, id) {
+  console.log(token)
+  return fetch(`${BASE_URL}/${endpoint}/${id}`,{
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${token}` 
+    }
+  }).then((response) => {
+    console.log(response)
     if (response.status === 200) {
       return response.json();
     } else {
@@ -10,8 +19,14 @@ async function getAll(endpoint) {
   });
 }
 
-async function get(endpoint, id){
-  return fetch(`${BASE_URL}/${endpoint}/${id}`).then((response) => {
+async function get(endpoint, id, token){
+  return fetch(`${BASE_URL}/${endpoint}/${id}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${token}` 
+    }
+  }).then((response) => {
     if (response.status === 200) {
       return response.json();
     } else {
@@ -20,10 +35,29 @@ async function get(endpoint, id){
   });
 }
 
-async function post(endpoint, data) {
+async function post(endpoint, data, token) {
   return fetch(`${BASE_URL}/${endpoint}`, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${token}` 
+    },
+    body: JSON.stringify(data),
+  }).then((response) => {
+    if (response.status === 201 || response.status === 400) {
+      return response.json();
+    } else {
+      return Promise.reject("Unexpected status code: " + response.status);
+    }
+  });
+}
+
+async function postLogin(endpoint, data) {
+  return fetch(`${BASE_URL}/${endpoint}`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
     body: JSON.stringify(data),
   }).then((response) => {
     if (response.status === 200 || response.status === 400) {
@@ -34,13 +68,13 @@ async function post(endpoint, data) {
   });
 }
 
-async function update(endpoint, id, data) {
-  return fetch(`${BASE_URL}/${endpoint}/${id}`, {
+async function update(endpoint, data) {
+  return fetch(`${BASE_URL}/${endpoint}`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(data),
   }).then((response) => {
-    if (response.status === 204) {
+    if (response.status === 200) {
       return null;
     } else if (response.status === 400) {
       return response.json();
@@ -67,5 +101,6 @@ export default {
   get,
   post,
   update,
-  remove
+  remove,
+  postLogin
 };

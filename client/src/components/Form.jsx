@@ -17,14 +17,10 @@ export const Form = ({ fields, onSubmit, submitText, defaultValues={} }) => {
           [name]: value,
         });
       };
-
       const handleSubmit = (e) => {
         e.preventDefault();
         onSubmit(form);
       }
-
-
-
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
       {fields.map((field) => (
@@ -68,4 +64,3 @@ export const Form = ({ fields, onSubmit, submitText, defaultValues={} }) => {
     </form>
   )
 }
-

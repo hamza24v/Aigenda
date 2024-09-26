@@ -78,6 +78,14 @@ public class AppUserJdbcTemplateRepository implements AppUserRepository {
     }
 
     @Override
+    public int findIdByUsername(String username) {
+        List<String> roles = getRolesByUsername(username);
+        final String sql = "select app_user_id, first_name, last_name, email, username, password, disabled from app_user where username = ?;";
+        return jdbcTemplate.query(sql, new AppUserMapper(roles), username).get(0).getAppUserId();
+
+    }
+
+    @Override
     public boolean deleteUserById(int userId) {
         return jdbcTemplate.update("delete from app_user where app_user_id = ?;",userId) > 0;
     }

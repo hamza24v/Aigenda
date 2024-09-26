@@ -11,39 +11,47 @@ export const CalendarsProvider = ({ children }) => {
   // retreve user jwt info
 
   useEffect(() => {
-    fetchCalendars();
+    if (user) {
+      fetchCalendars();
+      console.log(user)
+    }
   }, [user]);
 
   // CRUD
   const fetchCalendars = async () => {
-    await apiService
-      .getAll("calendars")
-      .then((data) => setCalendars(data))
+     await apiService
+      .getAll(`calendars/user`, localStorage.getItem("jwt_token"), user.appUserId)
+      .then((data) => {
+        setCalendars(data)
+        console.log(data)
+      })
       .catch(console.log);
-      console.log(calendars);
   };
 
   const createCalendar = async (calendar) => {
-    setCalendars([...calendars, calendar]);
+    console.log(calendar)
+    calendar.userId = user.appUserId
     apiService
-      .post("calendars/create", calendar)
+      .post("calendars/create", calendar, user.jwtToken) 
       .then((data) => {
         if (!data.calendarId) {
           setCalendarErrors(data);
           console.log(data);
+        } else {
+          setCalendars((prevcalendars) => (
+            [...prevcalendars, data]
+          ))
+          console.log(data)
         }
       })
       .catch(console.log);
-
-    // temporary add calendar
+  
     fetchCalendars();
-
-    console.log("calender added: ", calendar);
+    console.log("Calendar added: ", calendar);
   };
 
   const updateCalendar = (calendar) => {
-    calendar.calendarId = calendars.findIndex(calendar);
-    apiService.update("calendars/",  calendar.calendarId).then((data) => {
+    apiService.update(`calendars/update/${calendar.calendarId}`, calendar).then((data) => {
       if (data) {
         setCalendarErrors(data);
       }
@@ -51,9 +59,9 @@ export const CalendarsProvider = ({ children }) => {
     .catch(console.log);
   };
 
-  const deleteCalendar = async (userId,calendarId) => {
+  const deleteCalendar = async (calendarId) => {
     apiService
-      .remove( `calendars/delete/${userId}/${calendarId}`)
+      .remove( `calendars/delete/${user.appUserId}/${calendarId}`)
       .then(() => {
         setCalendars((prevcalendars) =>
           prevcalendars.filter((e) => e.calendarId !== calendarId)

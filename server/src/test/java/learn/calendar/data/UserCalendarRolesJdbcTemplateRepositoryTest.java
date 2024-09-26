@@ -32,7 +32,7 @@ class UserCalendarRolesJdbcTemplateRepositoryTest {
         ucr.setRoleId(1);
 
         UserCalendarRoles actual = repository.add(ucr);
-        assertEquals(actual.getId(), 3);
+        assertEquals(actual.getUcrId(), 3);
     }
 
     @Test
