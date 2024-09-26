@@ -20,7 +20,7 @@ const localizer = dateFnsLocalizer({
   locales,
 });
 
-const events = [
+const eventss = [
   {
     title: 'Meeting',
     start: new Date(),
@@ -39,7 +39,7 @@ export const MyCalendar = ({ events }) => {
     <div className="w-full h-full">
       <Calendar
         localizer={localizer}
-        events={events}
+        events={eventss}
         startAccessor="start"
         endAccessor="end"
         selectable

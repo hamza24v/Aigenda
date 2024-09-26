@@ -30,7 +30,7 @@ function Home() {
       <div className="sm:w-3/4">
         <MyCalendar events={events} />
       </div>
-      <AddEvent />
+      <AddEvent calendars={calendars}/>
     </div>
   );
 }

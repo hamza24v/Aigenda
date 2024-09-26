@@ -29,8 +29,8 @@ export const CalendarsProvider = ({ children }) => {
   };
 
   const createCalendar = async (calendar) => {
-    console.log(calendar)
     calendar.userId = user.appUserId
+    console.log(user.jwtToken)
     apiService
       .post("calendars/create", calendar, user.jwtToken) 
       .then((data) => {

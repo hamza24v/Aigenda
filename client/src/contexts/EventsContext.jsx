@@ -1,11 +1,12 @@
 import React, { createContext, useState, useEffect, useContext } from "react";
 import apiService from "../apiService";
-
+import { useUser } from "./UserContext";
 export const EventsContext = createContext();
 
 export const EventsProvider = ({ children }) => {
   const [events, setEvents] = useState([]);
   const [eventErrors, setEventErrors] = useState([]);
+  const {user} = useUser();
   // retreve user jwt info
 
   useEffect(() => {
@@ -21,18 +22,24 @@ export const EventsProvider = ({ children }) => {
   };
 
   const createEvent = async (event) => {
-    // apiService
-    //   .post("events", event)
-    //   .then((data) => {
-    //     if (!data.eventId) {
-    //       setEventErrors(data);
-    //     }
-    //   })
-    //   .catch(console.log);
-
-    // temporary add event
-    setEvents([...events, event]);
-    //fetchEvents();
+    event["status"] = "Pending"
+    event["calendarId"] = parseInt(event["calendarId"]);
+    event["appUserId"] = user.appUserId;
+    console.log(event)
+    console.log(user.jwt_token)
+    apiService
+      .post("events/create", event, user.jwt_token)
+      .then((data) => {
+        if (!data.eventId) {
+          setEventErrors(data);
+        } else {
+          setEvents((prevEvents) => (
+            [...prevEvents, data]
+          ))
+        }
+      })
+      .catch(console.log);
+    console.log("event added", event)
   };
 
   const updateEvent = (event, id) => {

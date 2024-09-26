@@ -34,7 +34,7 @@ public class EventController {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    @PostMapping
+    @PostMapping("/create")
     public ResponseEntity<Object> add(@RequestBody Event event) {
         Result<Event> result = service.add(event);
         if (result.isSuccess()) {
