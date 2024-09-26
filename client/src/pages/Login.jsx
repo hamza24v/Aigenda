@@ -22,8 +22,8 @@ function Login() {
   },[user])
  
   return (
-    <div className="flex justify-center min-h-screen  bg-gray-100">
-      <div className="flex flex-col justify-center my-auto w-full max-w-md p-6 bg-white rounded-lg shadow-xl space-y-4">
+    <div className="flex justify-center min-h-screen  bg-gradient-to-t from-blue-100 to-blue-150 ">
+      <div className="flex flex-col justify-center my-auto w-full max-w-md p-6 shadow-indigo-300 border-2 border-indigo-200  bg-white rounded-lg shadow-xl space-y-4">
         <Typography
           className="text-center text-2xl font-semibold"
           id="modal-modal-title"
