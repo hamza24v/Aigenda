@@ -11,6 +11,7 @@ import { PopupModal } from "../components/PopupModal";
 import { Form } from "../components/Form";
 import { EVENT_FORM } from '../constants';
 import { useEvents } from "../contexts/EventsContext";
+import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
 
 const locales = {
   "en-US": enUS,
@@ -26,9 +27,8 @@ const localizer = dateFnsLocalizer({
 
 export const MyCalendar = ({ events, calendars }) => {
 
-  const { updateEvent } = useEvents();
+  const { updateEvent, deleteEvent, selectedEvent, setSelectedEvent } = useEvents();
   const [eventFormFields, setEventFormFields] = useState(EVENT_FORM);
-  const [selectedEvent, setSelectedEvent] = useState(null);
   
 
   useEffect(() => {
@@ -40,7 +40,7 @@ export const MyCalendar = ({ events, calendars }) => {
       field.name === 'calendarId' ? { ...field, options: calendarOptions } : field
     );
     setEventFormFields(updatedEventForm);
-  }, [calendars]);
+  }, [calendars, selectedEvent]);
 
 
   const convertToDate = (dateString) => new Date(dateString);
@@ -60,12 +60,20 @@ export const MyCalendar = ({ events, calendars }) => {
 
     await updateEvent(formData, selectedEvent.eventId)
     setShowModal(false)
+    setSelectedEvent(null);
 
   };
 
   const handleSelectEvent = (event) => {
-    setSelectedEvent(event); 
+    setSelectedEvent(event);
+    console.log(event)
     setShowModal(true); 
+  }
+
+  const handleDelete = async () => {
+    await deleteEvent(selectedEvent.eventId)
+    setSelectedEvent(null)
+    setShowModal(false)
   }
 
   return (
@@ -88,7 +96,12 @@ export const MyCalendar = ({ events, calendars }) => {
             fields={eventFormFields}
             onSubmit={handleSubmit}
             submitText="Submit Changes"
+            defaultValues={selectedEvent}
           />
+          <DeleteOutlinedIcon
+              className="text-gray-600 cursor-pointer hover:text-red-600 hover:bg-gray-200 rounded-full  transition-all ease-in-out"
+              onClick={handleDelete}
+            />
         </PopupModal>
       )}
       

@@ -7,6 +7,7 @@ export const EventsProvider = ({ children }) => {
   const [events, setEvents] = useState([]);
   const [eventErrors, setEventErrors] = useState([]);
   const {user} = useUser();
+  const [selectedEvent, setSelectedEvent] = useState(null)
   // retreve user jwt info
 
   useEffect(() => {
@@ -14,7 +15,7 @@ export const EventsProvider = ({ children }) => {
       fetchEvents();
     }
     
-  }, [user]);
+  }, [user, events]);
 
   // CRUD
   const fetchEvents = async () => {
@@ -64,10 +65,17 @@ export const EventsProvider = ({ children }) => {
   };
 
   const deleteEvent = async (id) => {
+    console.log("id:")
+    console.log(id)
     apiService
-    .remove( `events/${eventId}`)
+    .remove( `events/delete/${id}`)
       .then(() => {
         setEvents((prevEvents) => prevEvents.filter((e) => e.eventId !== id));
+      })
+      .then((data) => {
+        if (data) {
+          setEventErrors(data);
+        }
       })
       .catch(console.log);
     fetchEvents();
@@ -75,7 +83,7 @@ export const EventsProvider = ({ children }) => {
 
   return (
     <EventsContext.Provider
-      value={{ events, createEvent, updateEvent, deleteEvent, eventErrors }}
+      value={{ setSelectedEvent,selectedEvent,events, createEvent, updateEvent, deleteEvent, eventErrors }}
     >
       {children}
     </EventsContext.Provider>

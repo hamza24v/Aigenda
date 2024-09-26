@@ -59,8 +59,6 @@ export const ChatBot = () => {
     }
   }
 
-  
-
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -117,7 +115,7 @@ export const ChatBot = () => {
         >
           <Form
             fields={formType}
-            defaultValues={fullBotResponse}
+            defaultValues={botResponse}
             onSubmit={handleFormSubmit}
             submitText="Save"
           />
