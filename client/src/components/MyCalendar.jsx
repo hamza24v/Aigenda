@@ -35,15 +35,18 @@ const events = [
 
 export const MyCalendar = ({ events }) => {
 
-  const eventData = events
 
   const convertToDate = (dateString) => new Date(dateString);
 
-  const transformedEvents = eventData.map(event => ({
-    title: event.title || event.description,  // Use the title, or fall back to the description
-    start: convertToDate(event.startDate),    // Convert the start date string to a Date object
-    end: convertToDate(event.endDate)         // Convert the end date string to a Date object
+  const transformedEvents = events.map(event => ({
+    title: event.title || event.description,  
+    start: convertToDate(event.startDate),    
+    end: convertToDate(event.endDate)         
   }));
+
+  const handleSelect = (event) => {
+    console.log(event)
+  }
 
   console.log(transformedEvents)
 
@@ -56,6 +59,7 @@ export const MyCalendar = ({ events }) => {
         endAccessor="end"
         selectable
         style={{ height: "100vh" }}
+        onSelectEvent={handleSelect}
       />
     </div>
   );
