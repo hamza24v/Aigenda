@@ -11,7 +11,7 @@ function Home() {
   const { events } = useEvents();
   const { calendars } = useCalendars();
   const personalCalendars = calendars.filter(({ type }) => type.toLowerCase() === "personal");
-  const orgCalendars = calendars.filter(({ type }) => type.toLowerCase() === "organization");
+  const orgCalendars = calendars.filter(({ type }) => type.toLowerCase() === "broadcast");
   const navigate = useNavigate();
   const { user } = useUser();
   useEffect(() => {
@@ -21,6 +21,7 @@ function Home() {
     }
   },[user, calendars])
   //console.log(user);
+
   return (
     <div className="flex flex-col sm:flex-row  min-h-screen">
       <div className="sm:w-1/4">

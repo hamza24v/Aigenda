@@ -1,6 +1,6 @@
 
 @url = http://localhost:8080/api/calendars
-@token = eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJjYWxlbmRhciIsInN1YiI6InRlc3RAam9uZXMuY29tIiwiYXV0aG9yaXRpZXMiOiJST0xFX1VTRVIiLCJleHAiOjE3MjczMDk2OTd9.GbRvzWSNWe6w8YEivyf4K6WAS9PV1ULWX8b6gWYmXhA
+@token = eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJjYWxlbmRhciIsInN1YiI6InRlc3RAam9uZXMuY29tIiwiYXV0aG9yaXRpZXMiOiJST0xFX1VTRVIiLCJleHAiOjE3MjczMjM5OTZ9.zKtSFEbeVL-7mdb__OINSj0vV_fEnHwy8ug4e_oi0lY
 
 GET {{url}}/user/4
 Authorization: Bearer {{token}}
