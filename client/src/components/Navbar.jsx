@@ -13,7 +13,7 @@ function Navbar() {
     <nav className="relative w-full shadow-md p-4 z-50">
       <div className="flex justify-start text-xl items-center max-w-7xl mx-auto">
         <NavLink
-          to="/"
+          to="/home"
           className={({ isActive }) =>
             isActive ? "text-blue-500 font-bold px-10" : "text-gray-500 px-10"
           }
