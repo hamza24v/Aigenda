@@ -15,74 +15,51 @@ export const ChatBot = () => {
   const [showModal, setShowModal] = useState(false);
   const { createEvent } = useEvents();
   const { createCalendar, calendars } = useCalendars();
-  const [eventFormFields, setEventFormFields] = useState(EVENT_FORM);
-
 
   let formType;
-  let fullBotResponse;
-
-  // useEffect(() => {
-  //   // Update the event form with calendar options once fetched
-  //   const calendarOptions = calendars.map(({title, calendarId}) => {
-  //     return {value: calendarId, label: title}
-  //   })
-  //   const updatedEventForm = eventFormFields.map((field) =>
-  //     field.name === 'calendarId' ? { ...field, options: calendarOptions } : field
-  //   );
-  //   setEventFormFields(updatedEventForm);
-  // }, [calendars]);
 
   if (botResponse) {
     if (Object.keys(botResponse).length === 2) {
-      console.log("bot called cal "); 
       console.log(botResponse);
       formType = CALENDAR_FORM;
-      // const secondTypeOption = botResponse.type.includes("personal")
-      //   ? { value: "ORGANIZATION", label: "Organization" }
-      //   : { value: "PERSONAL", label: "Personal" };
-      // formType[formType.length - 1] = {
-      //   label: "Type",
-      //   name: "type",
-      //   type: "select",
-      //   options: [
-      //     {
-      //       value: botResponse.type,
-      //       label:
-      //         botResponse.type.charAt(0).toUpperCase() +
-      //         botResponse.type.slice(1),
-      //     },
-      //     secondTypeOption,
-      //   ],
-      //   placeholder: "Select Type",
-      //   required: true,
-      // };
-      
-    } else {
-      console.log("bot called"); 
-      console.log(botResponse);
-      formType = EVENT_FORM;
-      const calendarOptions = calendars.map(({title, calendarId}) => {
-        return {value: calendarId, label: title}
-      })
+      const secondTypeOption = botResponse.type.includes("personal")
+        ? { value: "ORGANIZATION", label: "Organization" }
+        : { value: "PERSONAL", label: "Personal" };
       formType[formType.length - 1] = {
-        label: 'Calendars',
-        name: 'calendarId',
-        type: 'select',
+        label: "Type",
+        name: "type",
+        type: "select",
+        options: [
+          {
+            value: botResponse.type,
+            label:
+              botResponse.type.charAt(0).toUpperCase() +
+              botResponse.type.slice(1),
+          },
+          secondTypeOption,
+        ],
+        placeholder: "Select Type",
+        required: true,
+      };
+    } else {
+      formType = EVENT_FORM;
+      const calendarOptions = calendars.map(({ title, calendarId }) => {
+        return { value: calendarId, label: title };
+      });
+      formType[formType.length - 1] = {
+        label: "Calendars",
+        name: "calendarId",
+        type: "select",
         options: calendarOptions,
-        placeholder: 'Select Calendars',
-        required: true
-    }
-
-      fullBotResponse = {...botResponse, options : calendarOptions}
-      console.log("full bot response")
-      console.log(fullBotResponse);
+        placeholder: "Select Calendars",
+        required: true,
+      };
     }
   }
 
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if(message.trim()){
+    if (message.trim()) {
       const response = await sendMessage(message);
       const { event, calendar } = response;
       setBotResponse(event ? event : calendar);
@@ -90,15 +67,14 @@ export const ChatBot = () => {
     } else {
       alert("Please enter a valid message");
     }
-   
   };
 
   const handleFormSubmit = async (formData) => {
     if (Object.keys(botResponse).length === 2) {
       await createCalendar(formData);
+    } else {
+      await createEvent(formData);
     }
-    else{
-    await createEvent(formData);}
     setShowModal(false);
     console.log("event added");
     console.log(formData);
@@ -107,7 +83,7 @@ export const ChatBot = () => {
   return (
     <Box
       component="form"
-      sx={{ "& .MuiTextField-root": { m: 3, width: "90%", } }}
+      sx={{ "& .MuiTextField-root": { m: 3, width: "90%" } }}
       noValidate
       autoComplete="off"
     >

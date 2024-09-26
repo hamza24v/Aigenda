@@ -12,6 +12,7 @@ const systemPrompt = `You are a schedule manager assistant who's job is to sched
   "title": str,
   "type": str,
  }
+  calendar type can either be "personal" or "organizational" no other options, therefore it is up to you to decide based on user implication.
  event: {
   "title": str,
   "startDate": datetime-local,

@@ -143,6 +143,27 @@ const LOGIN_FORM = [
     }
 ]
 
+const features = [ 
+    {
+      "image": "/ai_schedule.jpg",
+      "title": "AI-Powered Event Scheduling",
+      "description":
+        "No more manual input—ask AiGenda to create events for you! Whether it's setting a meeting, scheduling a task, or booking an appointment, the AI handles it all in seconds, saving you time and effort."
+    },
+    {
+      "image": "/reminder.png",
+      "title": "Smart Reminders & Notifications",
+      "description":
+        "AiGenda provides intelligent reminders that adjust based on your schedule changes and priorities. Never miss an important event, with notifications that adapt to real-time updates."
+    },
+    {
+      "image": "/integration.jpg",
+      "title": "Seamless Calendar Integration",
+      "description":
+        "AiGenda syncs effortlessly with your favorite calendar tools like Google Calendar and Outlook, ensuring all your events are in one place while benefiting from AI-driven automation."
+    }
+];
 
 
-export { EDIT_CALENDAR_FORM, EVENT_FORM, CALENDAR_FORM, CALENDARS, REGISTRATION_FORM, LOGIN_FORM }
+
+export { EDIT_CALENDAR_FORM, EVENT_FORM, CALENDAR_FORM, CALENDARS, REGISTRATION_FORM, LOGIN_FORM, features }
