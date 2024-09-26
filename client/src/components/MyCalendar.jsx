@@ -20,7 +20,7 @@ const localizer = dateFnsLocalizer({
   locales,
 });
 
-const eventss = [
+const events = [
   {
     title: 'Meeting',
     start: new Date(),
@@ -35,11 +35,23 @@ const eventss = [
 
 export const MyCalendar = ({ events }) => {
 
+  const eventData = events
+
+  const convertToDate = (dateString) => new Date(dateString);
+
+  const transformedEvents = eventData.map(event => ({
+    title: event.title || event.description,  // Use the title, or fall back to the description
+    start: convertToDate(event.startDate),    // Convert the start date string to a Date object
+    end: convertToDate(event.endDate)         // Convert the end date string to a Date object
+  }));
+
+  console.log(transformedEvents)
+
   return (
     <div className="w-full h-full">
       <Calendar
         localizer={localizer}
-        events={eventss}
+        events={transformedEvents}
         startAccessor="start"
         endAccessor="end"
         selectable

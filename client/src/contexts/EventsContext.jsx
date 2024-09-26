@@ -10,14 +10,20 @@ export const EventsProvider = ({ children }) => {
   // retreve user jwt info
 
   useEffect(() => {
-    fetchEvents();
-  }, []);
+    if (user) {
+      fetchEvents();
+    }
+    
+  }, [user]);
 
   // CRUD
   const fetchEvents = async () => {
     await apiService
-      .getAll("events")
-      .then((data) => setEvents(data))
+      .getAll("events/user", localStorage.getItem("jwt_token"), user.appUserId)
+      .then((data) => {
+        setEvents(data)
+        console.log(data)
+      })
       .catch(console.log);
   };
 

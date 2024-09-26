@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from 'react'
 
 
-
-
-
 export const Form = ({ fields, onSubmit, submitText, defaultValues={} }) => {
     const [form, setForm] = useState(defaultValues);
     useEffect(() => {
