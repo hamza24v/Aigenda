@@ -38,7 +38,6 @@ function Navbar() {
           />
           <p className="text-3xl pl-1 font-semibold font-sans text-blue-600">AiGenda</p>
         </div>
-        ;
         {user ? (
           <div className="ml-[18%]">
             <NavLink

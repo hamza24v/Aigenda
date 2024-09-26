@@ -1,31 +1,70 @@
 import React from "react";
 import { features } from "../constants";
 import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 
 function LandingPage() {
   const navigate = useNavigate();
+
+  // style for hero:
+  const containerVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.6,
+        ease: "easeOut",
+        when: "beforeChildren",
+        staggerChildren: 0.15,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.6, ease: "easeOut" },
+    },
+  };
   return (
     <div className="flex flex-col justify-center w-full ">
       {/* Hero  */}
       <div className="flex items-center justify-center min-h-screen bg-gradient-to-t from-blue-100 to-blue-150 ">
-        <section className="py-20 text-center space-y-5 items-center ">
-          <h1 className="text-8xl font-bold font-sans bg-gradient-to-r from-blue-300 to-blue-600 bg-clip-text text-transparent">
+        <motion.section
+          className="py-20 text-center space-y-5 items-center"
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+        >
+          <motion.h1
+            className="text-8xl font-bold font-sans bg-gradient-to-r from-blue-300 to-blue-600 bg-clip-text text-transparent"
+            variants={itemVariants}
+          >
             AiGenda
-          </h1>
-          <p className="max-w-3xl flex text-lg  justify-center text-gray-600 leading-8">
+          </motion.h1>
+          <motion.p
+            className="max-w-3xl flex text-lg justify-center text-gray-600 leading-8"
+            variants={itemVariants}
+          >
             Tired of the hassle of manually scheduling events and managing your
             time? Meet AiGenda, the smart calendar app that does it all for you.
             Simply ask our AI assistant to book meetings, set reminders, and
             adjust your schedule—all in real-time. Sync your calendar, sit back,
             and let AiGenda take care of the rest.
-          </p>
-          <button
+          </motion.p>
+
+          <motion.button
             className="bg-green-400 text-white text-md p-4 bg-gradient-to-r from-blue-400 to-blue-600 rounded-lg hover:scale-105 hover:ring-2 transition duration-300"
             onClick={() => navigate("/register")}
+            variants={itemVariants}
+            whileHover={{ scale: 1.1 }}
           >
             Get Started
-          </button>
-        </section>
+          </motion.button>
+        </motion.section>
       </div>
 
       {/* features */}
@@ -42,8 +81,7 @@ function LandingPage() {
               <div
                 className="w-full h-[40vh] mb-4 bg-cover bg-no-repeat"
                 style={{ backgroundImage: `url(${feature.image})` }}
-              >
-              </div>
+              ></div>
               <p className="font-bold text-2xl mb-2">{feature.title}</p>
               <p className="text-gray-800 text-md">{feature.description}</p>
             </div>
