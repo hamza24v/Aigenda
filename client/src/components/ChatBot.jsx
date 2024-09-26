@@ -37,6 +37,26 @@ export const ChatBot = () => {
       console.log("bot called cal "); 
       console.log(botResponse);
       formType = CALENDAR_FORM;
+      // const secondTypeOption = botResponse.type.includes("personal")
+      //   ? { value: "ORGANIZATION", label: "Organization" }
+      //   : { value: "PERSONAL", label: "Personal" };
+      // formType[formType.length - 1] = {
+      //   label: "Type",
+      //   name: "type",
+      //   type: "select",
+      //   options: [
+      //     {
+      //       value: botResponse.type,
+      //       label:
+      //         botResponse.type.charAt(0).toUpperCase() +
+      //         botResponse.type.slice(1),
+      //     },
+      //     secondTypeOption,
+      //   ],
+      //   placeholder: "Select Type",
+      //   required: true,
+      // };
+      
     } else {
       console.log("bot called"); 
       console.log(botResponse);

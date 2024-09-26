@@ -7,6 +7,8 @@ function NotFound() {
         Page Not Found
       </span>
     </div>
+
+
   );
 }
 
