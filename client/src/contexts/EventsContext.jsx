@@ -1,38 +1,51 @@
 import React, { createContext, useState, useEffect, useContext } from "react";
 import apiService from "../apiService";
-
+import { useUser } from "./UserContext";
 export const EventsContext = createContext();
 
 export const EventsProvider = ({ children }) => {
   const [events, setEvents] = useState([]);
   const [eventErrors, setEventErrors] = useState([]);
+  const {user} = useUser();
   // retreve user jwt info
 
   useEffect(() => {
-    fetchEvents();
-  }, []);
+    if (user) {
+      fetchEvents();
+    }
+    
+  }, [user]);
 
   // CRUD
   const fetchEvents = async () => {
     await apiService
-      .getAll("events")
-      .then((data) => setEvents(data))
+      .getAll("events/user", localStorage.getItem("jwt_token"), user.appUserId)
+      .then((data) => {
+        setEvents(data)
+        console.log(data)
+      })
       .catch(console.log);
   };
 
   const createEvent = async (event) => {
-    // apiService
-    //   .post("events", event)
-    //   .then((data) => {
-    //     if (!data.eventId) {
-    //       setEventErrors(data);
-    //     }
-    //   })
-    //   .catch(console.log);
-
-    // temporary add event
-    setEvents([...events, event]);
-    //fetchEvents();
+    event["status"] = "Pending"
+    event["calendarId"] = parseInt(event["calendarId"]);
+    event["appUserId"] = user.appUserId;
+    console.log(event)
+    console.log(user.jwt_token)
+    apiService
+      .post("events/create", event, user.jwt_token)
+      .then((data) => {
+        if (!data.eventId) {
+          setEventErrors(data);
+        } else {
+          setEvents((prevEvents) => (
+            [...prevEvents, data]
+          ))
+        }
+      })
+      .catch(console.log);
+    console.log("event added", event)
   };
 
   const updateEvent = (event, id) => {

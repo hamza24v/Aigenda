@@ -13,28 +13,32 @@ const EVENT_FORM = [
     },
     {
         label: 'Start Date',
-        name:'start_date',
+        name:'startDate',
         type: 'datetime-local',
         placeholder: 'Select Start Date',
         required: true
     },
     {
         label: 'End Date',
-        name: 'end_date',
+        name: 'endDate',
         type: 'datetime-local',
         placeholder: 'Select End Date',
         required: true
     },
-    { // TODO: add a way to take in multiple emails
-        label: 'Guests',
-        name: 'guests',
-        type: 'email',
-        placeholder: 'Enter Guests Emails',
-        required: false
+    {
+        label: 'Type',
+        name: 'eventType',
+        type: 'select',
+        options: [
+            { value: 'PERSONAL', label: 'Personal' },
+            { value: 'ORGANIZATION', label: 'Organization'}
+        ],
+        placeholder: 'Select Type',
+        required: true
     },
     {
         label: 'Calendars',
-        name: 'calendars',
+        name: 'calendarId',
         type: 'select',
         options: [],
         placeholder: 'Select Calendars',
