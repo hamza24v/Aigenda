@@ -61,6 +61,25 @@ const CALENDAR_FORM = [
         required: true
     }
 ]
+const EDIT_CALENDAR_FORM = [
+    {
+        label: 'Title',
+        name: 'title',
+        placeholder: 'Enter Title',
+        required: true
+    },
+    {
+        label: 'Type',
+        name: 'type',
+        type: 'select',
+        options: [
+            { value: 'PERSONAL', label: 'Personal' },
+            { value: 'ORGANIZATION', label: 'Organization'}
+        ],
+        placeholder: 'Select Type',
+        required: true
+    }
+]
 
 const CALENDARS = [
     {
@@ -122,4 +141,4 @@ const LOGIN_FORM = [
 
 
 
-export { EVENT_FORM, CALENDAR_FORM, CALENDARS, REGISTRATION_FORM, LOGIN_FORM }
+export { EDIT_CALENDAR_FORM, EVENT_FORM, CALENDAR_FORM, CALENDARS, REGISTRATION_FORM, LOGIN_FORM }

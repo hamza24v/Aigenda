@@ -1,9 +1,11 @@
-import React, { useState } from 'react'
-
-export const Form = ({ fields, onSubmit, submitText }) => {
-    
-    const [form, setForm] = useState([]);
-
+import React, { useState, useEffect } from 'react'
+export const Form = ({ fields, onSubmit, submitText, defaultValues={} }) => {
+    const [form, setForm] = useState(defaultValues);
+    useEffect(() => {
+      setForm(defaultValues);
+      console.log("default values: ");
+      console.log(defaultValues);
+    }, []);
     const handleChange = (e) => {
         const { name, value } = e.target;
         setForm({
@@ -11,14 +13,10 @@ export const Form = ({ fields, onSubmit, submitText }) => {
           [name]: value,
         });
       };
-
       const handleSubmit = (e) => {
         e.preventDefault();
         onSubmit(form);
       }
-
-
-
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
       {fields.map((field) => (
@@ -62,4 +60,3 @@ export const Form = ({ fields, onSubmit, submitText }) => {
     </form>
   )
 }
-

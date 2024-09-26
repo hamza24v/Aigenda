@@ -40,7 +40,7 @@ public class CalendarController {
 
     }
 
-    @PutMapping("/{calendarId}")
+    @PutMapping("/update/{calendarId}")
     public ResponseEntity<?> updateCalendar(@RequestBody Calendar calendar, @PathVariable int calendarId) {
         Result<Calendar> result = calendarService.update(calendar);
         if (result.isSuccess()) {

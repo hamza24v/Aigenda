@@ -68,13 +68,13 @@ async function postLogin(endpoint, data) {
   });
 }
 
-async function update(endpoint, id, data) {
-  return fetch(`${BASE_URL}/${endpoint}/${id}`, {
+async function update(endpoint, data) {
+  return fetch(`${BASE_URL}/${endpoint}`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(data),
   }).then((response) => {
-    if (response.status === 204) {
+    if (response.status === 200) {
       return null;
     } else if (response.status === 400) {
       return response.json();

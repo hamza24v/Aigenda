@@ -26,11 +26,10 @@ export const CalendarsProvider = ({ children }) => {
         console.log(data)
       })
       .catch(console.log);
-      
-      console.log('Here')
   };
 
   const createCalendar = async (calendar) => {
+    console.log(calendar)
     calendar.userId = user.appUserId
     apiService
       .post("calendars/create", calendar, user.jwtToken) 
@@ -52,8 +51,7 @@ export const CalendarsProvider = ({ children }) => {
   };
 
   const updateCalendar = (calendar) => {
-    calendar.calendarId = calendars.findIndex(calendar);
-    apiService.update("calendars/",  calendar.calendarId).then((data) => {
+    apiService.update(`calendars/update/${calendar.calendarId}`, calendar).then((data) => {
       if (data) {
         setCalendarErrors(data);
       }
@@ -61,9 +59,9 @@ export const CalendarsProvider = ({ children }) => {
     .catch(console.log);
   };
 
-  const deleteCalendar = async (userId,calendarId) => {
+  const deleteCalendar = async (calendarId) => {
     apiService
-      .remove( `calendars/delete/${userId}/${calendarId}`)
+      .remove( `calendars/delete/${user.appUserId}/${calendarId}`)
       .then(() => {
         setCalendars((prevcalendars) =>
           prevcalendars.filter((e) => e.calendarId !== calendarId)
