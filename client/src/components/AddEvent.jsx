@@ -33,7 +33,6 @@ export const AddEvent = ({calendars}) => {
         <Button variant="contained" onClick={() => setShowModal(true)}>
           Add Event
         </Button>
-        <Button onClick={()=> clickButton()}> CLICK ME</Button>
 
         {showModal && (
           <PopupModal

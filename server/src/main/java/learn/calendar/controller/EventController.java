@@ -43,7 +43,7 @@ public class EventController {
         return ErrorResponse.build(result);
     }
 
-    @PutMapping("/{eventId}")
+    @PutMapping("/update/{eventId}")
     public ResponseEntity<Object> update(@RequestBody Event event,@PathVariable int eventId ) {
         Result<Event> result = service.update(event);
         if (result.isSuccess()) {

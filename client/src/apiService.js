@@ -71,7 +71,8 @@ async function postLogin(endpoint, data) {
 async function update(endpoint, data) {
   return fetch(`${BASE_URL}/${endpoint}`, {
     method: "PUT",
-    headers: { "Content-Type": "application/json" },
+    headers: { 
+      "Content-Type": "application/json" },
     body: JSON.stringify(data),
   }).then((response) => {
     if (response.status === 200) {

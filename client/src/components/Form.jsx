@@ -1,14 +1,20 @@
 import React, { useState, useEffect } from 'react'
+import { useUser } from '../contexts/UserContext';
 
 export const Form = ({ fields, onSubmit, submitText, defaultValues={} }) => {
     
     const [form, setForm] = useState(defaultValues);
+    const {user} = useUser();
+    
 
-    // useEffect(() => {
-    //   setForm(defaultValues);
-    //   console.log("default values: ");
-    //   console.log(defaultValues);
-    // }, [defaultValues]);
+    useEffect(() => {
+      if (user && !defaultValues) {
+        setForm(defaultValues);
+        console.log("default values: ");
+        console.log(defaultValues);
+      }
+      
+    }, [defaultValues]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;

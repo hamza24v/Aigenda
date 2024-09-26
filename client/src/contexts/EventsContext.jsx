@@ -31,8 +31,6 @@ export const EventsProvider = ({ children }) => {
     event["status"] = "Pending"
     event["calendarId"] = parseInt(event["calendarId"]);
     event["appUserId"] = user.appUserId;
-    console.log(event)
-    console.log(user.jwt_token)
     apiService
       .post("events/create", event, user.jwt_token)
       .then((data) => {
@@ -49,9 +47,13 @@ export const EventsProvider = ({ children }) => {
   };
 
   const updateEvent = (event, id) => {
-    event.eventId = id;
-    apiService
-      .update("events", id, event)
+    event["eventId"] = id;
+    event["status"] = "Pending";
+    event["calendarId"] = parseInt(event["calendarId"]);
+    event["appUserId"] = user.appUserId;
+    console.log("event")
+    console.log(event)
+    apiService.update(`events/update/${id}`, event)
       .then((data) => {
         if (data) {
           setEventErrors(data);

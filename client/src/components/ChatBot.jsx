@@ -14,8 +14,24 @@ export const ChatBot = () => {
   const [botResponse, setBotResponse] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const { createEvent } = useEvents();
-  const { createCalendar } = useCalendars();
+  const { createCalendar, calendars } = useCalendars();
+  const [eventFormFields, setEventFormFields] = useState(EVENT_FORM);
+
+
   let formType;
+  let fullBotResponse;
+
+  // useEffect(() => {
+  //   // Update the event form with calendar options once fetched
+  //   const calendarOptions = calendars.map(({title, calendarId}) => {
+  //     return {value: calendarId, label: title}
+  //   })
+  //   const updatedEventForm = eventFormFields.map((field) =>
+  //     field.name === 'calendarId' ? { ...field, options: calendarOptions } : field
+  //   );
+  //   setEventFormFields(updatedEventForm);
+  // }, [calendars]);
+
   if (botResponse) {
     if (Object.keys(botResponse).length === 2) {
       console.log("bot called cal "); 
@@ -25,8 +41,27 @@ export const ChatBot = () => {
       console.log("bot called"); 
       console.log(botResponse);
       formType = EVENT_FORM;
+      const calendarOptions = calendars.map(({title, calendarId}) => {
+        return {value: calendarId, label: title}
+      })
+      formType[formType.length - 1] = {
+        label: 'Calendars',
+        name: 'calendarId',
+        type: 'select',
+        options: calendarOptions,
+        placeholder: 'Select Calendars',
+        required: true
+    }
+
+      fullBotResponse = {...botResponse, options : calendarOptions}
+      console.log("full bot response")
+      console.log(fullBotResponse);
     }
   }
+
+  
+
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if(message.trim()){
@@ -82,7 +117,7 @@ export const ChatBot = () => {
         >
           <Form
             fields={formType}
-            defaultValues={botResponse}
+            defaultValues={fullBotResponse}
             onSubmit={handleFormSubmit}
             submitText="Save"
           />

@@ -12,7 +12,7 @@ function Home() {
   const { events } = useEvents();
   const { calendars } = useCalendars();
   const personalCalendars = calendars.filter(({ type }) => type.toLowerCase() === "personal");
-  const orgCalendars = calendars.filter(({ type }) => type.toLowerCase() === "organization");
+  const orgCalendars = calendars.filter(({ type }) => type.toLowerCase() === "broadcast");
   const navigate = useNavigate();
   const { user } = useUser();
   console.log("events");
@@ -21,7 +21,7 @@ function Home() {
     if (!user) {
       navigate("/login");
     }
-  },[user, navigate])
+  },[user, events])
 
   return (
     <div className="flex flex-col sm:flex-row  min-h-screen">
@@ -33,7 +33,7 @@ function Home() {
         </div>
       </div>
       <div className="sm:w-3/4">
-        <MyCalendar events={events} />
+        <MyCalendar calendars={calendars} events={events} />
       </div>
       <AddEvent calendars={calendars}/>
     </div>

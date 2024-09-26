@@ -33,6 +33,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/api/calendars/update/*").permitAll()
                 .antMatchers("/api/events/create").permitAll()
                 .antMatchers("/api/events/user/*").permitAll()
+                .antMatchers("/api/events/update/*").permitAll()
                 .antMatchers(HttpMethod.DELETE,"/api/user/delete/*").hasRole("ADMIN")
                 .anyRequest().authenticated()
                 .and()

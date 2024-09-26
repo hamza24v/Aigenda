@@ -1,11 +1,11 @@
 @url = http://localhost:8080/api/events
-@token = eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJjYWxlbmRhciIsInN1YiI6InRlc3RAam9uZXMuY29tIiwiYXV0aG9yaXRpZXMiOiJST0xFX1VTRVIiLCJleHAiOjE3MjczMjE4NjB9.j9TxTcn5BJe-JWhoVwu71AG-QIo4Ysi0b_3Tj2cYc3I
+@token = eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJjYWxlbmRhciIsInN1YiI6InRlc3RAam9uZXMuY29tIiwiYXV0aG9yaXRpZXMiOiJST0xFX1VTRVIiLCJleHAiOjE3MjczMzY1MTh9.1bEbOhkj7JxgoSQuLZQfXu579EfkJfi2rH6A7mQcp3Q
 GET {{url}} HTTP/1.1
 Authorization: Bearer {{token}}
 
 ###
 
-GET {{url}}/user/1 HTTP/1.1
+GET {{url}}/user/4 HTTP/1.1
 Authorization: Bearer {{token}}
 
 ###
@@ -29,7 +29,7 @@ Content-Type: application/json
     "title": "Work meeting",
     "description": "discussing things at the meeting",
     "calendarId": 2,
-    "appUserId": 1,
+    "appUserId": 4,
     "eventType": "PERSONAL",
     "startDate": "2024-11-20T12:00:00",
     "endDate": "2024-11-20T13:30:00",
@@ -59,7 +59,7 @@ Content-Type: application/json
 
 ###
 
-PUT {{url}}/4 HTTP/1.1
+PUT {{url}}/update/4 HTTP/1.1
 Authorization: Bearer {{token}}
 Content-Type: application/json
 
@@ -68,7 +68,7 @@ Content-Type: application/json
     "title": "Wodrk meeting",
     "description": "discussing things at the meeting",
     "calendarId": 2,
-    "appUserId": 1,
+    "appUserId": 4,
     "eventType": "PERSONAL",
     "startDate": "2024-11-20T12:00:00",
     "endDate": "2024-11-20T13:30:00",

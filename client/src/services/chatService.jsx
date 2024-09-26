@@ -14,8 +14,8 @@ const systemPrompt = `You are a schedule manager assistant who's job is to sched
  }
  event: {
   "title": str,
-  "start_date": datetime-local,
-  "end_date": datetime-local,
+  "startDate": datetime-local,
+  "endDate": datetime-local,
   "description": str
  }
     datatime-local follows the js input tag format of "YYYY-MM-DDTHH:mm"
