@@ -15,7 +15,7 @@ export const CalendarsProvider = ({ children }) => {
       fetchCalendars();
       console.log(user)
     }
-  }, [user]);
+  }, [user, calendars]);
 
   // CRUD
   const fetchCalendars = async () => {

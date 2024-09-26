@@ -15,7 +15,7 @@ export const EventsProvider = ({ children }) => {
       fetchEvents();
     }
     
-  }, [user]);
+  }, [user, events]);
 
   // CRUD
   const fetchEvents = async () => {
@@ -63,8 +63,6 @@ export const EventsProvider = ({ children }) => {
   };
 
   const deleteEvent = async (id) => {
-    console.log("id:")
-    console.log(id)
     apiService
     .remove( `events/delete/${id}`)
       .then(() => {

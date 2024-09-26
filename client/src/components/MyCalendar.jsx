@@ -31,6 +31,7 @@ export const MyCalendar = ({ events, calendars }) => {
   const [eventFormFields, setEventFormFields] = useState(EVENT_FORM);
 
 
+
   useEffect(() => {
     // Update the event form with calendar options once fetched
     const calendarOptions = calendars.map(({ title, calendarId }) => {
@@ -54,7 +55,7 @@ export const MyCalendar = ({ events, calendars }) => {
     end: convertToDate(event.endDate)         // Convert the end date string to a Date object
   }));
 
-  const handleSubmit = async (formData) => {
+  async function handleSubmit(formData) {
 
     await updateEvent(formData, selectedEvent.eventId)
     setShowModal(false)
@@ -63,8 +64,8 @@ export const MyCalendar = ({ events, calendars }) => {
   };
 
   const handleSelectEvent = (event) => {
-    setSelectedEvent(event);
-    console.log(event.eventId)
+    const eventToEdit = events.find((e) => e.eventId === event.eventId);
+    setSelectedEvent(eventToEdit);
     setShowModal(true);
   }
 
@@ -101,7 +102,6 @@ export const MyCalendar = ({ events, calendars }) => {
             onClick={handleDelete}
             fontSize="large"
           />
-
         </PopupModal>
       )}
 

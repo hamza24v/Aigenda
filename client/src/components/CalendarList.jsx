@@ -10,9 +10,9 @@ import { EDIT_CALENDAR_FORM } from "../constants";
 
 export const CalendarList = ({ title, calendars }) => {
 
-  const {deleteCalendar} = useCalendars()
-  const {updateCalendar} = useCalendars()
+  const {deleteCalendar, updateCalendar} = useCalendars()
   const [showModal, setShowModal] = useState(false);
+  const [calendarToEdit,setCalendarToEdit] = useState()
 
 
   const handleSubmit = async (formData, calendar) => {
@@ -20,12 +20,18 @@ export const CalendarList = ({ title, calendars }) => {
     const updatedTitle = title ? title : calendar.title;
     const updatedType = type ? type : calendar.type;
     const updatedCalendar = {...calendar, title : updatedTitle, type: updatedType}
-    console.log("Updated Calendar:")
     console.log(updatedCalendar)
     await updateCalendar(updatedCalendar);
     setShowModal(false);
 
   };
+
+  const handleCalendarToEdit = (calendar) => {
+    setCalendarToEdit(calendar);
+    setShowModal(true);
+  }
+
+
   
   return (
     <div className="p-4">
@@ -50,7 +56,7 @@ export const CalendarList = ({ title, calendars }) => {
           <div className="flex space-x-4 justify-center items-center ml-auto">
             <div>
               <EditOutlinedIcon className="text-gray-600 cursor-pointer hover:text-blue-600 hover:bg-gray-200 rounded-full  transition-all ease-in-out"
-              onClick={()=> setShowModal(true)} />
+              onClick={()=> handleCalendarToEdit(calendar)} />
               {showModal && (
               <PopupModal
                 title="Edit Calendar"
@@ -61,6 +67,7 @@ export const CalendarList = ({ title, calendars }) => {
                     fields={EDIT_CALENDAR_FORM}
                     onSubmit={(formData)=> {handleSubmit(formData, calendar)}}
                     submitText="Submit Changes"
+                    defaultValues={calendarToEdit}
                   />
                 </PopupModal>
             )}
