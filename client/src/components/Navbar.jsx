@@ -1,57 +1,51 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useUser } from "../contexts/UserContext";
 import { useLocation } from "react-router-dom";
 function Navbar() {
   const location = useLocation();
-  const { user } = useUser(); 
-  
+  const { user, setUser } = useUser();
+  const navigate = useNavigate();
+
   if (location.pathname === "/login" || location.pathname === "/register") {
     return null;
   }
 
+  const handleClick = () => {
+    navigate('/')
+    console.log("HELLO")
+  }
+
+  const handleLogout = () => {
+    setUser(null);
+    navigate("/login");
+  };
+
   return (
     <nav className="relative w-full shadow-md p-4 z-50">
-      <div className="flex justify-start text-xl items-center max-w-7xl mx-auto">
-        <NavLink
-          to="/home"
-          className={({ isActive }) =>
-            isActive ? "text-blue-500 font-bold px-10" : "text-gray-500 px-10"
-          }
-        >
-          Home
-        </NavLink>
-        <NavLink
-          to="/invites"
-          className={({ isActive }) =>
-            isActive ? "text-blue-500 font-bold px-10" : "text-gray-500 px-10"
-          }
-        >
-          Invites
-        </NavLink>
-        {user ? (
+      <div className="flex justify-start text-xl items-center mx-auto">
 
-          <>
-            <NavLink
-              to="/my-calendar"
-              className={({ isActive }) =>
-                isActive ? "text-blue-500 font-bold px-10" : "text-gray-500 px-10"
-              }
-            >
-              My Calendar
-            </NavLink>
-            <span className="ml-auto px-10 text-blue-500 font-bold">
-              {user.username}
-            </span>
-          </>
-        ) : (
+        <div onClick={handleClick} className="cursor-pointer flex items-center justify-between">
+          <img
+            className="w-10 h-10" // Adjusted styling for the icon
+            src="/calendar-icon.png"
+            alt="Calendar Icon"
+          />
+          <p className="text-3xl pl-1">Aigenda</p>
+        </div>
+        <div className="ml-[18%]">
           <NavLink
-            to="/login"
+            to="/home"
             className={({ isActive }) =>
               isActive ? "text-blue-500 font-bold px-10" : "text-gray-500 px-10"
             }
           >
-            Login
+            Home
           </NavLink>
+        </div>
+        {user && (
+        <button onClick={handleLogout} class=" text-white font-bold py-2 px-4 rounded transition ease-in-out delay-150 bg-red-500 hover:-translate-y-1 hover:scale-110 hover:bg-red-700 duration-300 ml-[65%]">
+          Logout
+        </button>
         )}
       </div>
     </nav>

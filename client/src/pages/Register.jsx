@@ -3,14 +3,16 @@ import { Form } from "../components/Form";
 import { REGISTRATION_FORM } from "../constants";
 import Typography from "@mui/material/Typography";
 import { useUser } from "../contexts/UserContext";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 function Register() {
   const { registerUser,user} = useUser(); // fetching register route from UserContext
+  const navigate = useNavigate();
 
   const handleSubmit = async (formData) => {
     await registerUser(formData);
     console.log("String registered");
     console.log(user);
+    navigate("/login")
   };
   return (
     <div className="flex justify-center min-h-screen  bg-gray-100">

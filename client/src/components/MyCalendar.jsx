@@ -29,12 +29,12 @@ export const MyCalendar = ({ events, calendars }) => {
 
   const { updateEvent, deleteEvent, selectedEvent, setSelectedEvent } = useEvents();
   const [eventFormFields, setEventFormFields] = useState(EVENT_FORM);
-  
+
 
   useEffect(() => {
     // Update the event form with calendar options once fetched
-    const calendarOptions = calendars.map(({title, calendarId}) => {
-      return {value: calendarId, label: title}
+    const calendarOptions = calendars.map(({ title, calendarId }) => {
+      return { value: calendarId, label: title }
     })
     const updatedEventForm = eventFormFields.map((field) =>
       field.name === 'calendarId' ? { ...field, options: calendarOptions } : field
@@ -54,8 +54,6 @@ export const MyCalendar = ({ events, calendars }) => {
     end: convertToDate(event.endDate)         // Convert the end date string to a Date object
   }));
 
-
-
   const handleSubmit = async (formData) => {
 
     await updateEvent(formData, selectedEvent.eventId)
@@ -66,8 +64,8 @@ export const MyCalendar = ({ events, calendars }) => {
 
   const handleSelectEvent = (event) => {
     setSelectedEvent(event);
-    console.log(event)
-    setShowModal(true); 
+    console.log(event.eventId)
+    setShowModal(true);
   }
 
   const handleDelete = async () => {
@@ -99,12 +97,14 @@ export const MyCalendar = ({ events, calendars }) => {
             defaultValues={selectedEvent}
           />
           <DeleteOutlinedIcon
-              className="text-gray-600 cursor-pointer hover:text-red-600 hover:bg-gray-200 rounded-full  transition-all ease-in-out"
-              onClick={handleDelete}
-            />
+            className="mt-4 ml-[44%] text-gray-600 cursor-pointer hover:text-red-600 hover:bg-gray-200 rounded-full  transition-all ease-in-out"
+            onClick={handleDelete}
+            fontSize="large"
+          />
+
         </PopupModal>
       )}
-      
+
     </div>
   );
 };

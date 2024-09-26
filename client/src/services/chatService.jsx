@@ -20,7 +20,7 @@ const systemPrompt = `You are a schedule manager assistant who's job is to sched
   "description": str
  }
     datatime-local follows the js input tag format of "YYYY-MM-DDTHH:mm"
-  assume end date is one hour after start by default if end date is not given.
+  assume end date is one hour after start by default if end date is not given. If a year is not provided, consider it as 2024.
 
 `;
 export const sendMessage = async (message) => {

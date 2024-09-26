@@ -15,7 +15,7 @@ export const EventsProvider = ({ children }) => {
       fetchEvents();
     }
     
-  }, [user, events]);
+  }, [user]);
 
   // CRUD
   const fetchEvents = async () => {
@@ -52,8 +52,6 @@ export const EventsProvider = ({ children }) => {
     event["status"] = "Pending";
     event["calendarId"] = parseInt(event["calendarId"]);
     event["appUserId"] = user.appUserId;
-    console.log("event")
-    console.log(event)
     apiService.update(`events/update/${id}`, event)
       .then((data) => {
         if (data) {

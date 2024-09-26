@@ -19,7 +19,7 @@ function Home() {
   console.log(events);
   useEffect(() => {
     if (!user) {
-      navigate("/login");
+      navigate("/");
     }
   },[user, events])
 
