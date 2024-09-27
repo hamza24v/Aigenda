@@ -20,27 +20,8 @@ export const ChatBot = () => {
 
   if (botResponse) {
     if (Object.keys(botResponse).length === 2) {
-      console.log(botResponse);
       formType = CALENDAR_FORM;
-      const secondTypeOption = botResponse.type.includes("personal")
-        ? { value: "ORGANIZATION", label: "Organization" }
-        : { value: "PERSONAL", label: "Personal" };
-      formType[formType.length - 1] = {
-        label: "Type",
-        name: "type",
-        type: "select",
-        options: [
-          {
-            value: botResponse.type,
-            label:
-              botResponse.type.charAt(0).toUpperCase() +
-              botResponse.type.slice(1),
-          },
-          secondTypeOption,
-        ],
-        placeholder: "Select Type",
-        required: true,
-      };
+      console.log(botResponse)
     } else {
       formType = EVENT_FORM;
       const calendarOptions = calendars.map(({ title, calendarId }) => {

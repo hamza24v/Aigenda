@@ -39,7 +39,7 @@ function Navbar() {
           <p className="text-3xl pl-1 font-semibold font-sans text-blue-600">AiGenda</p>
         </div>
         {user ? (
-          <div className="ml-[18%]">
+          <div className="ml-[48%] flex flex-row w-full justify-between items-center">
             <NavLink
               to="/home"
               className={({ isActive }) =>
@@ -52,7 +52,7 @@ function Navbar() {
             </NavLink>
             <button
               onClick={handleLogout}
-              class=" text-white font-bold py-2 px-4 rounded transition ease-in-out delay-150 bg-red-500 hover:-translate-y-1 hover:scale-110 hover:bg-red-700 duration-300 ml-[65%]"
+              class=" text-white font-bold py-2 px-4 rounded transition ease-in-out delay-150 bg-red-500 hover:-translate-y-1 hover:bg-red-700 duration-300 ml-[65%]"
             >
               Logout
             </button>
