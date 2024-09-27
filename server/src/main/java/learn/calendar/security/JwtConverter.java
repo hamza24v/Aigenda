@@ -21,7 +21,7 @@ public class JwtConverter {
     // 2. "Configurable" constants
     private final String ISSUER = "calendar";
     private final int EXPIRATION_MINUTES = 15;
-    private final int EXPIRATION_MILLIS = EXPIRATION_MINUTES * 60 * 1000;
+    private final int EXPIRATION_MILLIS = EXPIRATION_MINUTES * 60 * 3000;
 
     public String getTokenFromUser(User user) {
 
