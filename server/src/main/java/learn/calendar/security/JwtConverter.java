@@ -20,8 +20,8 @@ public class JwtConverter {
     private Key key = Keys.secretKeyFor(SignatureAlgorithm.HS256);
     // 2. "Configurable" constants
     private final String ISSUER = "calendar";
-    private final int EXPIRATION_MINUTES = 15;
-    private final int EXPIRATION_MILLIS = EXPIRATION_MINUTES * 60 * 3000;
+    private final int EXPIRATION_MINUTES = 30;
+    private final int EXPIRATION_MILLIS = EXPIRATION_MINUTES * 60 * 1000;
 
     public String getTokenFromUser(User user) {
 

@@ -5,7 +5,7 @@ const openai = new OpenAI({
   dangerouslyAllowBrowser: true,
 });
 let currentDate = new Date();
-currentDate.setDate(currentDate.getDate() - 1);
+currentDate.setDate(currentDate.getDate());
 const formattedDate = currentDate.toISOString().split("T")[0];
 const currentTime = currentDate.toTimeString().split(" ")[0].slice(0, 5);
 const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
@@ -50,6 +50,7 @@ export const sendMessage = async (message) => {
   });
 
   const response = JSON.parse(completion.choices[0].message.content);
+  console.log(currentDate);
 
   return response;
 };
