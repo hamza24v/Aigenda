@@ -1,0 +1,36 @@
+
+@url = http://localhost:8080/api/calendars
+@token = eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJjYWxlbmRhciIsInN1YiI6InRlc3RAam9uZXMuY29tIiwiYXV0aG9yaXRpZXMiOiJST0xFX1VTRVIiLCJleHAiOjE3MjczMzA1OTN9.zAyRtArGHXpTZiijR9EI_JAHt4a2JfQ02ACfonCs_eU
+
+GET {{url}}/user/4
+Authorization: Bearer {{token}}
+ 
+
+###
+
+PUT {{url}}/update/17 HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "calendarId": 17,
+    "title": "My Calendar",
+    "type": "PERSONAL",
+    "userId": 4
+}
+
+###
+POST {{url}}/create HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "title": "Workout Calendar",
+    "type": "PERSONAL",
+    "userId": 4
+}
+
+###
+
+DELETE {{url}}/delete/1/1 HTTP/1.1
+Authorization: Bearer {{token}}

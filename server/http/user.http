@@ -1,0 +1,43 @@
+@url = http://localhost:8080/api/user
+@token = eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJjYWxlbmRhciIsInN1YiI6IkFETUlOIiwiYXV0aG9yaXRpZXMiOiJST0xFX0FETUlOIiwiZXhwIjoxNzI3MjkxNzU2fQ.B_-kloLbJmUnO04ClmoQ4PfhRUyyja_Kod0r5HgyhRw
+
+
+POST {{url}}/authenticate HTTP/1.1
+Content-Type: application/json
+
+{
+    "username": "test@jones.com",
+    "password": "P@ssw0rd!"
+}
+
+###
+
+POST {{url}}/register HTTP/1.1
+Content-Type: application/json
+
+{
+    "firstName": "Mary",
+    "lastName": "Lim",
+    "email": "test@test.com",
+    "username": "test@jones.com",
+    "password": "P@ssw0rd!",
+    "roles": []
+}
+
+###
+
+POST {{url}}/register HTTP/1.1
+Content-Type: application/json
+
+{
+    "firstName": "coos",
+    "lastName": "lim",
+    "email": "test@test.com",
+    "username": "test2@jones.com",
+    "password": "P@ssw0rd!",
+    "roles": []
+}
+
+###
+DELETE {{url}}/delete/6 HTTP/1.1
+Authorization: Bearer {{token}}
